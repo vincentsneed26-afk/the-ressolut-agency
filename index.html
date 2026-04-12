@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="Favicon.png">
+<title>Housely — Curating the most Exclusive property in London</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;600;700&family=Noto+Serif:wght@400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #faf9f6;
+    --cream-alt: #f4f4f0;
+    --dark: #2f3430;
+    --gold: #d4af37;
+    --gold-dark: #6d5f07;
+    --gold-border: #ad9a1f;
+    --muted: #5c605c;
+    --footer-bg: #1a1a1a;
+    --nav-h: 72px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(24px, 5.5vw, 100px);
+    height: var(--nav-h);
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+    backdrop-filter: blur(6px);
+  }
+  nav.scrolled {
+    background: #fff;
+    box-shadow: 0 1px 16px rgba(0,0,0,0.07);
+  }
+  nav.scrolled .nav-logo,
+  nav.scrolled .nav-link { color: var(--dark); }
+  nav.scrolled .nav-cta {
+    border-color: var(--dark);
+    color: var(--dark);
+  }
+  nav.scrolled .nav-cta:hover {
+    background: var(--dark);
+    color: #fff;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2vw, 24px);
+    letter-spacing: -1.2px;
+    color: #fff;
+    transition: color 0.4s;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: clamp(20px, 3vw, 48px);
+    list-style: none;
+  }
+  .nav-link {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(11px, 1.1vw, 16px);
+    letter-spacing: 1.92px;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.4s, opacity 0.25s;
+  }
+  .nav-link:hover { opacity: 0.65; }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-cta {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 9px 25px;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s, border-color 0.4s;
+  }
+  .nav-cta:hover { background: #fff; color: var(--dark); }
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: #fff;
+    transition: background 0.4s, transform 0.3s;
+  }
+  nav.scrolled .nav-hamburger span { background: var(--dark); }
+
+  /* mobile nav drawer */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--cream);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .mobile-menu.open { opacity: 1; pointer-events: all; }
+  .mobile-menu a {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--dark);
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+  .mobile-close {
+    position: absolute;
+    top: 24px; right: 24px;
+    font-size: 28px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--dark);
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+    transition: transform 8s ease-out;
+  }
+  .hero-bg.loaded { transform: scale(1); }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.34);
+  }
+  .hero-content {
+    position: relative;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 900px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 6vw, 70px);
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 48px;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-gold {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: var(--gold);
+    padding: 18px 36px;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-gold:hover { background: #c49d2a; transform: translateY(-1px); }
+  .btn-ghost {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(6px);
+    background: rgba(255,255,255,0.1);
+    padding: 18px 36px;
+    text-decoration: none;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.6); }
+
+  /* scroll indicator line */
+  .scroll-line {
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 72px;
+    background: var(--cream);
+    opacity: 0.6;
+  }
+
+  /* ── SECTIONS SHARED ── */
+  section { width: 100%; }
+  .container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6.25vw, 100px);
+  }
+
+  /* ── FEATURED PENTHOUSES ── */
+  .featured { background: var(--cream); padding: clamp(64px, 8vw, 128px) 0; }
+  .featured-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 64px;
+  }
+  .featured-label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.2px;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .featured-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4.5vw, 60px);
+    font-weight: 400;
+    letter-spacing: -1.2px;
+    line-height: 1;
+    color: var(--dark);
+  }
+  .featured-desc {
+    border-left: 2px solid var(--gold-border);
+    padding-left: 32px;
+    max-width: 380px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 4vw, 64px);
+    align-items: start;
+  }
+  .property-card { display: flex; flex-direction: column; gap: 20px; }
+  .property-card.offset { padding-top: clamp(40px, 10vw, 160px); }
+  .property-img-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  .property-img-wrap img {
+    width: 100%;
+    height: clamp(280px, 45vw, 700px);
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s cubic-bezier(.16,1,.3,1);
+  }
+  .property-card:hover .property-img-wrap img { transform: scale(1.03); }
+  .property-badge {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: rgba(255,255,255,0.92);
+    padding: 4px 14px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--dark);
+  }
+  .property-meta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .property-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--dark);
+    line-height: 1.3;
+  }
+  .property-location {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .property-price-wrap { text-align: right; }
+  .property-price {
+    font-family: 'Noto Serif', serif;
+    font-size: 19px;
+    color: var(--dark);
+    white-space: nowrap;
+  }
+  .property-link {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-top: 4px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .property-link:hover { opacity: 0.6; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--cream-alt); padding: clamp(64px, 8vw, 128px) 0; }
+  .services-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 400;
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 20px;
+  }
+  .services-divider {
+    width: 96px;
+    height: 1px;
+    background: var(--gold-dark);
+    margin: 0 auto 64px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 3vw, 48px);
+  }
+  .service-card {
+    background: var(--cream);
+    border-bottom: 2px solid var(--gold-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: clamp(28px, 4vw, 40px) clamp(20px, 4vw, 60px);
+    transition: box-shadow 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .service-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); transform: translateY(-3px); }
+  .service-icon {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .service-icon svg { width: auto; height: 28px; }
+  .service-name {
+    font-family: 'Noto Serif', serif;
+    font-size: 17px;
+    color: var(--dark);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .service-desc { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+  /* ── TESTIMONIAL ── */
+  .testimonial { background: var(--cream); padding: clamp(64px, 8vw, 128px) clamp(24px, 12vw, 192px); text-align: center; }
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    color: var(--gold-dark);
+    line-height: 0.5;
+    display: block;
+    margin-bottom: 24px;
+    opacity: 0.4;
+  }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2.5vw, 34px);
+    line-height: 1.55;
+    color: var(--dark);
+    max-width: 900px;
+    margin: 0 auto 40px;
+  }
+  .quote-author {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 3.6px;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+  }
+  .quote-role { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  /* ── AVAILABLE LISTINGS ── */
+  .listings { background: var(--cream); padding: clamp(64px, 8vw, 128px) 0 clamp(48px, 6vw, 80px); }
+  .listings-subtitle {
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .listings-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 400;
+    letter-spacing: -0.36px;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .listings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.5vw, 32px);
+    margin-top: 48px;
+  }
+  .listing-card { display: flex; flex-direction: column; gap: 18px; }
+  .listing-img-wrap { overflow: hidden; }
+  .listing-img-wrap img {
+    width: 100%;
+    height: clamp(200px, 25vw, 373px);
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(.16,1,.3,1);
+  }
+  .listing-card:hover .listing-img-wrap img { transform: scale(1.04); }
+  .listing-meta {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .listing-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .listing-area {
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .listing-price-wrap { text-align: right; flex-shrink: 0; }
+  .listing-price {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--dark);
+    white-space: nowrap;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--footer-bg);
+    padding: clamp(48px, 5vw, 80px) clamp(24px, 6.25vw, 100px);
+    color: #fff;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(24px, 4vw, 48px);
+    padding-bottom: clamp(32px, 4vw, 64px);
+  }
+  .footer-brand {
+    font-family: 'Noto Serif', serif;
+    font-size: 19px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  .footer-tagline {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: #a8a29e;
+    line-height: 1.65;
+  }
+  .footer-col-title {
+    font-family: 'Noto Serif', serif;
+    font-size: 11px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 28px;
+  }
+  .footer-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-list a {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-list a:hover { color: var(--gold); }
+  .footer-newsletter-text {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: #a8a29e;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .footer-email-row {
+    display: flex;
+    border: 1px solid #44403c;
+    overflow: hidden;
+  }
+  .footer-email-row input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px 14px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #57534e;
+    outline: none;
+  }
+  .footer-email-row input::placeholder { color: #57534e; }
+  .footer-email-row button {
+    background: transparent;
+    border: none;
+    padding: 0 14px;
+    cursor: pointer;
+    color: #a8a29e;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .footer-email-row button:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: clamp(24px, 3vw, 40px);
+    margin-top: clamp(16px, 2vw, 32px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-copy {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: #a8a29e;
+  }
+  .footer-socials { display: flex; gap: 28px; }
+  .footer-socials a {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-socials a:hover { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .featured-grid { grid-template-columns: 1fr; }
+    .property-card.offset { padding-top: 0; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .listings-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    .mobile-menu { display: flex; }
+    .services-grid { grid-template-columns: 1fr; }
+    .listings-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .featured-header { flex-direction: column; align-items: flex-start; }
+    .featured-desc { border-left: none; border-top: 2px solid var(--gold-border); padding-left: 0; padding-top: 20px; }
+    .testimonial { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">HOUSELY</a>
+  <ul class="nav-links">
+    <li><a href="property.html" class="nav-link">PROPERTY</a></li>
+    <li><a href="mayfair.html" class="nav-link">MAYFAIR</a></li>
+    <li><a href="penthouses.html" class="nav-link">PENTHOUSES</a></li>
+    <li><a href="advisory.html" class="nav-link">ADVISORY</a></li>
+    <li><a href="estates.html" class="nav-link">ESTATES</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta">GET IN TOUCH</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">×</button>
+  <a href="property.html" onclick="closeMobile()">PROPERTY</a>
+  <a href="mayfair.html" onclick="closeMobile()">MAYFAIR</a>
+  <a href="penthouses.html" onclick="closeMobile()">PENTHOUSES</a>
+  <a href="advisory.html" onclick="closeMobile()">ADVISORY</a>
+  <a href="estates.html" onclick="closeMobile()">ESTATES</a>
+  <a href="index.html" class="btn-gold" onclick="closeMobile()" style="margin-top:16px;font-size:12px;">GET IN TOUCH</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Curating the most Exclusive<br>property in London</h1>
+    <div class="hero-buttons">
+      <a href="#listings" class="btn-gold">SEARCH FOR PROPERTY</a>
+      <a href="index.html" class="btn-ghost">GET A VALUATION</a>
+    </div>
+  </div>
+  <div class="scroll-line"></div>
+</section>
+
+<!-- ── FEATURED PENTHOUSES ── -->
+<section class="featured" id="featured">
+  <div class="container">
+    <div class="featured-header reveal">
+      <div>
+        <p class="featured-label">CURATED COLLECTION</p>
+        <h2 class="featured-title">Selected Penthouses</h2>
+      </div>
+      <p class="featured-desc">Discover architectural masterpieces overlooking the London skyline. Rare assets for the discerning collector.</p>
+    </div>
+    <div class="featured-grid">
+      <div class="property-card reveal reveal-delay-1">
+        <div class="property-img-wrap">
+          <img src="images/penthouse-glass-pavilion.jpg" alt="The Glass Pavilion, Knightsbridge" loading="lazy" />
+          <span class="property-badge">LIMITED RELEASE</span>
+        </div>
+        <div class="property-meta">
+          <div>
+            <div class="property-name">The Glass Pavilion</div>
+            <div class="property-location">Knightsbridge, SW1X</div>
+          </div>
+          <div class="property-price-wrap">
+            <div class="property-price">£12,500,000</div>
+            <a href="index.html" class="property-link">VIEW DETAILS</a>
+          </div>
+        </div>
+      </div>
+      <div class="property-card offset reveal reveal-delay-2">
+        <div class="property-img-wrap">
+          <img src="images/cadogan-gardens.jpg" alt="Cadogan Gardens, Chelsea" loading="lazy" />
+        </div>
+        <div class="property-meta">
+          <div>
+            <div class="property-name">Cadogan Gardens</div>
+            <div class="property-location">Chelsea, SW3</div>
+          </div>
+          <div class="property-price-wrap">
+            <div class="property-price">£8,950,000</div>
+            <a href="index.html" class="property-link">VIEW DETAILS</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="services" id="services">
+  <div class="container">
+    <h2 class="services-heading reveal">Bespoke Real Estate Advisory</h2>
+    <div class="services-divider reveal reveal-delay-1"></div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 24L14 4L24 24" stroke="#6d5f07" stroke-width="1.5" stroke-linejoin="round"/>
+            <line x1="7" y1="18" x2="21" y2="18" stroke="#6d5f07" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="service-name">Prime Sales</div>
+        <div class="service-desc">Securing record-breaking prices for London's most exceptional homes.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="12" width="20" height="12" stroke="#6d5f07" stroke-width="1.5"/>
+            <path d="M1 12L14 4L27 12" stroke="#6d5f07" stroke-width="1.5" stroke-linejoin="round"/>
+            <rect x="11" y="17" width="6" height="7" stroke="#6d5f07" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="service-name">Strategic Lettings</div>
+        <div class="service-desc">Matching global tenants with institutional-grade residential assets.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="9" stroke="#6d5f07" stroke-width="1.5"/>
+            <path d="M14 5v18M5 14h18" stroke="#6d5f07" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="service-name">Asset Advisory</div>
+        <div class="service-desc">Discreet acquisition and portfolio management for high-net-worth clients.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-icon">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 20H20M12 20V10M16 20V14" stroke="#6d5f07" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="4" y="4" width="20" height="6" stroke="#6d5f07" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="service-name">Interior Design</div>
+        <div class="service-desc">Elevating spaces through curation and bespoke architectural interventions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIAL ── -->
+<section class="testimonial" id="testimonial">
+  <div class="reveal">
+    <span class="quote-mark">"</span>
+    <p class="quote-text">"The Editorial Estate doesn't just sell property; they curate a lifestyle. Their discretion and deep understanding of high-value assets are unparalleled in the London market."</p>
+    <div class="quote-author">SIR JAMES HARRINGTON</div>
+    <div class="quote-role">Founding Partner, Harrington Global</div>
+  </div>
+</section>
+
+<!-- ── AVAILABLE LISTINGS ── -->
+<section class="listings" id="listings">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="listings-section-title">Available Listings</h2>
+      <p class="listings-subtitle">EXPLORE THE COLLECTION</p>
+    </div>
+    <div class="listings-grid">
+      <div class="listing-card reveal reveal-delay-1">
+        <div class="listing-img-wrap">
+          <img src="images/eaton-square.jpg" alt="Eaton Square, Belgravia" loading="lazy" />
+        </div>
+        <div class="listing-meta">
+          <div>
+            <div class="listing-name">Eaton Square</div>
+            <div class="listing-area">BELGRAVIA</div>
+          </div>
+          <div class="listing-price-wrap">
+            <div class="listing-price">£15,000,000</div>
+            <a href="index.html" class="property-link">VIEW DETAILS</a>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card reveal reveal-delay-2">
+        <div class="listing-img-wrap">
+          <img src="images/cheyne-walk.jpg" alt="Cheyne Walk, Chelsea" loading="lazy" />
+        </div>
+        <div class="listing-meta">
+          <div>
+            <div class="listing-name">Cheyne Walk</div>
+            <div class="listing-area">CHELSEA</div>
+          </div>
+          <div class="listing-price-wrap">
+            <div class="listing-price">£9,250,000</div>
+            <a href="index.html" class="property-link">VIEW DETAILS</a>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card reveal reveal-delay-3">
+        <div class="listing-img-wrap">
+          <img src="images/grosvenor-street.jpg" alt="Upper Grosvenor St, Mayfair" loading="lazy" />
+        </div>
+        <div class="listing-meta">
+          <div>
+            <div class="listing-name">Upper Grosvenor St</div>
+            <div class="listing-area">MAYFAIR</div>
+          </div>
+          <div class="listing-price-wrap">
+            <div class="listing-price">£21,000,000</div>
+            <a href="index.html" class="property-link">VIEW DETAILS</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Housely</div>
+      <p class="footer-tagline">Curating the world's most architectural homes for the next generation of global citizens.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">NAVIGATION</div>
+      <ul class="footer-list">
+        <li><a href="mayfair.html">MAYFAIR COLLECTION</a></li>
+        <li><a href="estates.html">OFF-MARKET ACCESS</a></li>
+        <li><a href="#" >NEW YORK ATELIER</a></li>
+        <li><a href="advisory.html">INVESTMENT ADVISORY</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">LEGAL &amp; PRIVACY</div>
+      <ul class="footer-list">
+        <li><a href="index.html">TERMS OF SERVICE</a></li>
+        <li><a href="index.html">PRIVACY POLICY</a></li>
+        <li><a href="index.html">COOKIE PREFERENCE</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">NEWSLETTER</div>
+      <p class="footer-newsletter-text">Receive our seasonal edit of off-market listings and architectural stories.</p>
+      <div class="footer-email-row">
+        <input type="email" placeholder="Email Address" aria-label="Email address" />
+        <button type="button" aria-label="Subscribe">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 THE EDITORIAL ESTATE. ALL RIGHTS RESERVED.</span>
+    <div class="footer-socials">
+      <a href="index.html">INSTAGRAM</a>
+      <a href="index.html">LINKEDIN</a>
+      <a href="index.html">YOUTUBE</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Sticky nav on scroll ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Hero bg subtle zoom on load ──
+  const heroBg = document.getElementById('heroBg');
+  setTimeout(() => heroBg.classList.add('loaded'), 100);
+
+  // ── Scroll reveal ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── Mobile menu ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+</script>
+</body>
+</html>

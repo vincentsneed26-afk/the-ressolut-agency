@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="Favicon.png">
+<title>Country Estates — Housely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;600;700&family=Noto+Serif:wght@400&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --cream:#faf9f6; --cream-alt:#f4f4f0; --dark:#2f3430; --gold:#d4af37; --gold-dark:#6d5f07; --gold-border:#ad9a1f; --muted:#5c605c; --footer-bg:#1a1a1a; --nav-h:72px; }
+html { scroll-behavior: smooth; }
+body { font-family:'Manrope',sans-serif; background:var(--cream); color:var(--dark); overflow-x:hidden; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 clamp(24px,5.5vw,100px); height:var(--nav-h); background:#fff; box-shadow:0 1px 16px rgba(0,0,0,.07); }
+.nav-logo { font-family:'Playfair Display',serif; font-size:clamp(18px,2vw,24px); letter-spacing:-1.2px; color:var(--dark); text-decoration:none; }
+.nav-links { display:flex; gap:clamp(20px,3vw,48px); list-style:none; }
+.nav-link { font-family:'Playfair Display',serif; font-size:clamp(11px,1.1vw,16px); letter-spacing:1.92px; color:var(--dark); text-decoration:none; transition:opacity .25s; }
+.nav-link:hover { opacity:.55; }
+.nav-link.active { border-bottom:1.5px solid var(--gold-dark); padding-bottom:2px; }
+.nav-right { display:flex; align-items:center; gap:20px; }
+.nav-cta { font-family:'Manrope',sans-serif; font-weight:600; font-size:12px; letter-spacing:1.2px; text-transform:uppercase; color:var(--dark); border:1px solid var(--dark); padding:9px 25px; text-decoration:none; transition:background .25s,color .25s; }
+.nav-cta:hover { background:var(--dark); color:#fff; }
+.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+.nav-hamburger span { display:block; width:24px; height:1.5px; background:var(--dark); }
+.mobile-menu { display:none; position:fixed; inset:0; background:var(--cream); z-index:99; flex-direction:column; align-items:center; justify-content:center; gap:32px; opacity:0; pointer-events:none; transition:opacity .3s; }
+.mobile-menu.open { opacity:1; pointer-events:all; }
+.mobile-menu a { font-family:'Playfair Display',serif; font-size:28px; color:var(--dark); text-decoration:none; }
+.mobile-close { position:absolute; top:24px; right:24px; font-size:28px; cursor:pointer; background:none; border:none; color:var(--dark); }
+.reveal { opacity:0; transform:translateY(32px); transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:.1s; } .reveal-delay-2 { transition-delay:.2s; } .reveal-delay-3 { transition-delay:.3s; } .reveal-delay-4 { transition-delay:.4s; }
+
+/* HERO — panoramic wide format */
+.hero { padding-top:var(--nav-h); background:var(--dark); position:relative; overflow:hidden; min-height:90svh; display:flex; align-items:center; }
+.hero-bg { position:absolute; inset:0; background-image:url('images/hero-bg.jpg'); background-size:cover; background-position:center; opacity:.38; }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(120deg,rgba(10,14,11,.85) 0%, rgba(10,14,11,.2) 100%); }
+.hero-content { position:relative; padding:clamp(64px,9vw,140px) clamp(24px,6.25vw,100px); max-width:1600px; margin:0 auto; width:100%; }
+.hero-label { font-size:11px; letter-spacing:2.2px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; font-family:'Manrope',sans-serif; font-weight:600; }
+.hero h1 { font-family:'Playfair Display',serif; font-size:clamp(38px,6vw,80px); font-weight:400; letter-spacing:-2px; line-height:1.04; color:#fff; max-width:800px; }
+.hero-sub { font-size:clamp(14px,1.3vw,17px); line-height:1.75; color:rgba(255,255,255,.6); max-width:560px; margin-top:24px; }
+.hero-badges { display:flex; gap:16px; flex-wrap:wrap; margin-top:40px; }
+.hero-badge { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); backdrop-filter:blur(4px); padding:8px 20px; font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:rgba(255,255,255,.7); }
+
+.container { max-width:1600px; margin:0 auto; padding:0 clamp(24px,6.25vw,100px); }
+.section-label { font-size:11px; letter-spacing:2.2px; color:var(--gold-dark); text-transform:uppercase; margin-bottom:14px; font-family:'Manrope',sans-serif; font-weight:600; }
+.section-title { font-family:'Playfair Display',serif; font-size:clamp(26px,3.5vw,48px); font-weight:400; letter-spacing:-1px; line-height:1.1; color:var(--dark); margin-bottom:48px; }
+.body-text { font-size:15px; line-height:1.75; color:var(--muted); margin-bottom:20px; }
+.gold-divider-left { width:64px; height:1px; background:var(--gold-border); margin:20px 0 28px; }
+
+/* INTRO SPLIT */
+.intro { background:var(--cream-alt); padding:clamp(64px,8vw,120px) 0; }
+.intro-grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(40px,7vw,120px); align-items:center; }
+.intro-img { overflow:hidden; }
+.intro-img img { width:100%; height:clamp(280px,36vw,560px); object-fit:cover; display:block; transition:transform .65s cubic-bezier(.16,1,.3,1); }
+.intro-img:hover img { transform:scale(1.03); }
+.tag-list { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+.tag { font-size:10px; letter-spacing:1.2px; text-transform:uppercase; border:1px solid var(--gold-border); color:var(--gold-dark); padding:5px 14px; font-weight:600; }
+
+/* ESTATES GRID — big feature + smaller list */
+.estates { background:var(--cream); padding:clamp(64px,8vw,120px) 0; }
+.filter-bar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:48px; }
+.filter-btn { font-family:'Manrope',sans-serif; font-weight:600; font-size:11px; letter-spacing:1.2px; text-transform:uppercase; padding:10px 22px; border:1px solid #d4cfc8; background:transparent; color:var(--muted); cursor:pointer; transition:background .2s,color .2s,border-color .2s; }
+.filter-btn:hover, .filter-btn.active { background:var(--dark); color:#fff; border-color:var(--dark); }
+/* big feature card on top */
+.estate-feature { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,4vw,64px); margin-bottom:clamp(48px,6vw,80px); align-items:end; }
+.estate-feature-img { overflow:hidden; position:relative; }
+.estate-feature-img img { width:100%; height:clamp(320px,40vw,600px); object-fit:cover; display:block; transition:transform .7s cubic-bezier(.16,1,.3,1); }
+.estate-feature:hover .estate-feature-img img { transform:scale(1.03); }
+.estate-badge { position:absolute; top:20px; left:20px; background:var(--gold); padding:5px 14px; font-family:'Manrope',sans-serif; font-weight:600; font-size:9px; letter-spacing:1.2px; text-transform:uppercase; color:#fff; }
+.estate-feature-content { padding-bottom:8px; }
+.estate-feature-content .prop-name { font-family:'Playfair Display',serif; font-size:clamp(24px,3vw,40px); color:var(--dark); font-weight:400; margin-bottom:8px; }
+.prop-county { font-size:12px; color:var(--muted); letter-spacing:.6px; text-transform:uppercase; margin-bottom:16px; }
+.prop-desc { font-size:14px; line-height:1.75; color:var(--muted); margin-bottom:20px; max-width:440px; }
+.prop-specs { display:flex; gap:24px; margin-bottom:28px; flex-wrap:wrap; }
+.prop-spec { font-size:12px; color:var(--muted); }
+.prop-spec strong { display:block; font-family:'Noto Serif',serif; font-size:18px; color:var(--dark); font-weight:400; }
+.prop-price-large { font-family:'Playfair Display',serif; font-size:clamp(22px,2.8vw,36px); color:var(--dark); margin-bottom:12px; }
+.prop-link { font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--gold-dark); font-weight:600; text-decoration:none; transition:opacity .2s; }
+.prop-link:hover { opacity:.6; }
+/* grid below */
+.card-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(24px,3vw,40px); }
+.prop-card { display:flex; flex-direction:column; gap:14px; }
+.prop-img { overflow:hidden; position:relative; }
+.prop-img img { width:100%; height:clamp(180px,20vw,300px); object-fit:cover; display:block; transition:transform .65s cubic-bezier(.16,1,.3,1); }
+.prop-card:hover .prop-img img { transform:scale(1.04); }
+.prop-meta { display:flex; justify-content:space-between; align-items:flex-end; }
+.prop-name-sm { font-family:'Playfair Display',serif; font-size:19px; color:var(--dark); }
+.prop-loc { font-size:11px; color:var(--muted); margin-top:3px; text-transform:uppercase; letter-spacing:.5px; }
+.prop-price-sm { font-family:'Noto Serif',serif; font-size:16px; color:var(--dark); text-align:right; white-space:nowrap; }
+.prop-lnk { font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--gold-dark); font-weight:600; text-decoration:none; display:block; margin-top:2px; }
+.prop-lnk:hover { opacity:.6; }
+
+/* REGIONS MAP STRIP */
+.regions { background:var(--dark); padding:clamp(56px,7vw,96px) 0; }
+.regions h2 { font-family:'Playfair Display',serif; font-size:clamp(24px,3vw,40px); font-weight:400; color:#fff; text-align:center; margin-bottom:48px; }
+.region-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:2px; }
+.region-card { position:relative; overflow:hidden; cursor:pointer; }
+.region-card img { width:100%; height:clamp(160px,18vw,280px); object-fit:cover; display:block; transition:transform .65s cubic-bezier(.16,1,.3,1); filter:brightness(.6) grayscale(.3); }
+.region-card:hover img { transform:scale(1.06); filter:brightness(.75) grayscale(0); }
+.region-label { position:absolute; bottom:16px; left:16px; right:16px; font-family:'Noto Serif',serif; font-size:clamp(13px,1.4vw,18px); color:#fff; letter-spacing:.5px; }
+.region-count { display:block; font-family:'Manrope',sans-serif; font-size:10px; letter-spacing:1.2px; color:rgba(255,255,255,.55); text-transform:uppercase; margin-top:2px; }
+
+/* WHY HOUSELY */
+.why { background:var(--cream-alt); padding:clamp(64px,8vw,120px) 0; }
+.why-grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(40px,7vw,120px); align-items:center; }
+.why-list { display:flex; flex-direction:column; gap:clamp(28px,4vw,48px); }
+.why-item { display:flex; gap:24px; align-items:flex-start; }
+.why-num { font-family:'Playfair Display',serif; font-size:32px; color:var(--gold); opacity:.5; flex-shrink:0; line-height:1; margin-top:-4px; }
+.why-item-title { font-family:'Noto Serif',serif; font-size:17px; color:var(--dark); margin-bottom:6px; }
+.why-item-desc { font-size:13px; line-height:1.7; color:var(--muted); }
+.why-img { overflow:hidden; }
+.why-img img { width:100%; height:clamp(320px,38vw,580px); object-fit:cover; display:block; }
+
+/* CTA */
+.cta-band { background:var(--dark); padding:clamp(56px,7vw,96px) clamp(24px,6.25vw,100px); text-align:center; }
+.cta-band h2 { font-family:'Playfair Display',serif; font-size:clamp(26px,3.5vw,44px); font-weight:400; color:#fff; margin-bottom:16px; }
+.cta-band p { font-size:15px; color:rgba(255,255,255,.6); margin-bottom:36px; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.65; }
+.btn-gold { display:inline-block; font-family:'Manrope',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.4px; text-transform:uppercase; color:var(--cream); background:var(--gold); padding:18px 36px; text-decoration:none; transition:background .25s,transform .2s; }
+.btn-gold:hover { background:#c49d2a; transform:translateY(-1px); }
+.btn-ghost { display:inline-block; font-family:'Manrope',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.4px; text-transform:uppercase; color:#fff; border:1px solid rgba(255,255,255,.35); padding:16px 34px; text-decoration:none; margin-left:16px; transition:background .25s,border-color .25s; }
+.btn-ghost:hover { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.6); }
+
+footer { background:var(--footer-bg); padding:clamp(48px,5vw,80px) clamp(24px,6.25vw,100px); }
+.footer-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(24px,4vw,48px); padding-bottom:clamp(32px,4vw,56px); }
+.footer-brand { font-family:'Noto Serif',serif; font-size:19px; letter-spacing:2px; text-transform:uppercase; color:#fff; margin-bottom:20px; }
+.footer-tagline { font-family:'Manrope',sans-serif; font-weight:300; font-size:11px; letter-spacing:1.1px; text-transform:uppercase; color:#a8a29e; line-height:1.65; }
+.footer-col-title { font-family:'Noto Serif',serif; font-size:11px; letter-spacing:2.4px; text-transform:uppercase; color:#fff; margin-bottom:24px; }
+.footer-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.footer-list a { font-family:'Manrope',sans-serif; font-weight:300; font-size:11px; letter-spacing:1.1px; text-transform:uppercase; color:rgba(255,255,255,.7); text-decoration:none; transition:color .2s; }
+.footer-list a:hover { color:var(--gold); }
+.footer-newsletter-text { font-family:'Manrope',sans-serif; font-weight:300; font-size:11px; letter-spacing:1.1px; text-transform:uppercase; color:#a8a29e; line-height:1.65; margin-bottom:18px; }
+.footer-email-row { display:flex; border:1px solid #44403c; overflow:hidden; }
+.footer-email-row input { flex:1; background:transparent; border:none; padding:12px 14px; font-family:'Manrope',sans-serif; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:#57534e; outline:none; }
+.footer-email-row input::placeholder { color:#57534e; }
+.footer-email-row button { background:transparent; border:none; padding:0 14px; cursor:pointer; color:#a8a29e; font-size:14px; transition:color .2s; }
+.footer-email-row button:hover { color:var(--gold); }
+.footer-bottom { border-top:1px solid rgba(255,255,255,.05); padding-top:clamp(20px,2.5vw,36px); margin-top:clamp(12px,1.5vw,24px); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+.footer-copy { font-family:'Manrope',sans-serif; font-weight:300; font-size:11px; letter-spacing:1.1px; text-transform:uppercase; color:#a8a29e; }
+.footer-socials { display:flex; gap:28px; }
+.footer-socials a { font-family:'Manrope',sans-serif; font-weight:300; font-size:11px; letter-spacing:1.1px; text-transform:uppercase; color:rgba(255,255,255,.7); text-decoration:none; transition:color .2s; }
+.footer-socials a:hover { color:var(--gold); }
+
+@media(max-width:1000px) { .estate-feature,.intro-grid,.why-grid { grid-template-columns:1fr; } .region-grid { grid-template-columns:repeat(3,1fr); } .card-grid { grid-template-columns:repeat(2,1fr); } .footer-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:600px) { .nav-links,.nav-cta { display:none; } .nav-hamburger { display:flex; } .mobile-menu { display:flex; } .card-grid { grid-template-columns:1fr; } .region-grid { grid-template-columns:repeat(2,1fr); } .footer-grid { grid-template-columns:1fr; } .btn-ghost { margin-left:0; margin-top:12px; display:block; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">HOUSELY</a>
+  <ul class="nav-links">
+    <li><a href="property.html" class="nav-link">PROPERTY</a></li>
+    <li><a href="mayfair.html" class="nav-link">MAYFAIR</a></li>
+    <li><a href="penthouses.html" class="nav-link">PENTHOUSES</a></li>
+    <li><a href="advisory.html" class="nav-link">ADVISORY</a></li>
+    <li><a href="estates.html" class="nav-link active">ESTATES</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta">GET IN TOUCH</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">×</button>
+  <a href="index.html" onclick="closeMobile()">HOME</a>
+  <a href="property.html" onclick="closeMobile()">PROPERTY</a>
+  <a href="mayfair.html" onclick="closeMobile()">MAYFAIR</a>
+  <a href="penthouses.html" onclick="closeMobile()">PENTHOUSES</a>
+  <a href="advisory.html" onclick="closeMobile()">ADVISORY</a>
+  <a href="estates.html" onclick="closeMobile()">ESTATES</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-label reveal">COUNTRY &amp; COAST</p>
+    <h1 class="reveal reveal-delay-1">England's Most<br>Remarkable Estates</h1>
+    <p class="hero-sub reveal reveal-delay-2">From Georgian manor houses in the Cotswolds to coastal retreats in Cornwall, we represent some of England's most architecturally significant private estates.</p>
+    <div class="hero-badges reveal reveal-delay-3">
+      <span class="hero-badge">COUNTRY HOUSES</span>
+      <span class="hero-badge">MANOR HOUSES</span>
+      <span class="hero-badge">COASTAL RETREATS</span>
+      <span class="hero-badge">FARMING ESTATES</span>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="reveal">
+        <p class="section-label">OUR APPROACH</p>
+        <h2 class="section-title" style="margin-bottom:16px;">Beyond Prime London</h2>
+        <div class="tag-list">
+          <span class="tag">GRADE I LISTED</span>
+          <span class="tag">AONB</span>
+          <span class="tag">OFF-MARKET</span>
+        </div>
+        <p class="body-text">England's finest country estates rarely reach the open market. Our network of landowners, estate agents and land agents gives our clients discreet access to properties that are quietly being offered for the first time in generations.</p>
+        <p class="body-text">We handle the whole process — from initial negotiation through due diligence, surveys and legal completion — as a single point of contact.</p>
+        <div class="gold-divider-left"></div>
+        <a href="#listings" class="btn-gold">VIEW ESTATES</a>
+      </div>
+      <div class="intro-img reveal reveal-delay-2">
+        <img src="images/eaton-square.jpg" alt="Country estate exterior" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESTATES LISTINGS -->
+<section class="estates" id="listings">
+  <div class="container">
+    <p class="section-label reveal">AVAILABLE ESTATES</p>
+    <h2 class="section-title reveal reveal-delay-1">The Collection</h2>
+    <div class="filter-bar reveal reveal-delay-2">
+      <button class="filter-btn active">ALL</button>
+      <button class="filter-btn">MANOR HOUSES</button>
+      <button class="filter-btn">FARMING ESTATES</button>
+      <button class="filter-btn">COASTAL</button>
+      <button class="filter-btn">LISTED BUILDINGS</button>
+    </div>
+
+    <!-- Feature estate -->
+    <div class="estate-feature reveal">
+      <div class="estate-feature-img">
+        <img src="images/penthouse-glass-pavilion.jpg" alt="Northwell Park" loading="lazy" />
+        <span class="estate-badge">EXCLUSIVE</span>
+      </div>
+      <div class="estate-feature-content">
+        <div class="prop-name">Northwell Park</div>
+        <div class="prop-county">Oxfordshire</div>
+        <p class="prop-desc">A magnificent Grade II* listed Georgian country house set within 340 acres of parkland, woodland and arable farmland, with a walled garden, stables and eight ancillary cottages.</p>
+        <div class="prop-specs">
+          <div class="prop-spec"><strong>340</strong> Acres</div>
+          <div class="prop-spec"><strong>12</strong> Bedrooms</div>
+          <div class="prop-spec"><strong>8</strong> Cottages</div>
+          <div class="prop-spec"><strong>Grade II*</strong> Listed</div>
+        </div>
+        <div class="prop-price-large">£14,500,000</div>
+        <a href="advisory.html#contact" class="prop-link">REQUEST DETAILS →</a>
+      </div>
+    </div>
+
+    <!-- 3 col grid below -->
+    <div class="card-grid">
+      <div class="prop-card reveal reveal-delay-1">
+        <div class="prop-img"><img src="images/cadogan-gardens.jpg" alt="Hartley Manor" loading="lazy" /></div>
+        <div class="prop-meta"><div><div class="prop-name-sm">Hartley Manor</div><div class="prop-loc">COTSWOLDS, GLOUCESTERSHIRE</div></div><div><div class="prop-price-sm">£6,200,000</div><a href="#" class="prop-lnk">VIEW →</a></div></div>
+      </div>
+      <div class="prop-card reveal reveal-delay-2">
+        <div class="prop-img"><img src="images/grosvenor-street.jpg" alt="Thornfield Hall" loading="lazy" /></div>
+        <div class="prop-meta"><div><div class="prop-name-sm">Thornfield Hall</div><div class="prop-loc">YORKSHIRE DALES</div></div><div><div class="prop-price-sm">£4,750,000</div><a href="#" class="prop-lnk">VIEW →</a></div></div>
+      </div>
+      <div class="prop-card reveal reveal-delay-3">
+        <div class="prop-img"><img src="images/cheyne-walk.jpg" alt="The Old Rectory" loading="lazy" /></div>
+        <div class="prop-meta"><div><div class="prop-name-sm">The Old Rectory</div><div class="prop-loc">SUFFOLK COUNTRYSIDE</div></div><div><div class="prop-price-sm">£3,100,000</div><a href="#" class="prop-lnk">VIEW →</a></div></div>
+      </div>
+      <div class="prop-card reveal reveal-delay-1">
+        <div class="prop-img"><img src="images/eaton-square.jpg" alt="Penrose House" loading="lazy" /></div>
+        <div class="prop-meta"><div><div class="prop-name-sm">Penrose House</div><div class="prop-loc">CORNWALL COASTAL</div></div><div><div class="prop-price-sm">£5,500,000</div><a href="#" class="prop-lnk">VIEW →</a></div></div>
+      </div>
+      <div class="prop-card reveal reveal-delay-2">
+        <div class="prop-img"><img src="images/penthouse-glass-pavilion.jpg" alt="Wychwood Farm" loading="lazy" /></div>
+        <div class="prop-meta"><div><div class="prop-name-sm">Wychwood Farm</div><div class="prop-loc">HEREFORDSHIRE</div></div><div><div class="prop-price-sm">£2,850,000</div><a href="#" class="prop-lnk">VIEW →</a></div></div>
+      </div>
+      <div class="prop-card reveal reveal-delay-3">
+        <div class="prop-img"><img src="images/cadogan-gardens.jpg" alt="Ashby Court" loading="lazy" /></div>
+        <div class="prop-meta"><div><div class="prop-name-sm">Ashby Court</div><div class="prop-loc">NORTHAMPTONSHIRE</div></div><div><div class="prop-price-sm">£8,900,000</div><a href="#" class="prop-lnk">VIEW →</a></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGIONS -->
+<section class="regions">
+  <div class="container">
+    <h2 class="reveal">Browse by Region</h2>
+    <div class="region-grid">
+      <div class="region-card reveal reveal-delay-1">
+        <img src="images/grosvenor-street.jpg" alt="Cotswolds" loading="lazy" />
+        <div class="region-label">Cotswolds<span class="region-count">14 listings</span></div>
+      </div>
+      <div class="region-card reveal reveal-delay-2">
+        <img src="images/eaton-square.jpg" alt="Home Counties" loading="lazy" />
+        <div class="region-label">Home Counties<span class="region-count">22 listings</span></div>
+      </div>
+      <div class="region-card reveal reveal-delay-3">
+        <img src="images/penthouse-glass-pavilion.jpg" alt="Cornwall" loading="lazy" />
+        <div class="region-label">Cornwall<span class="region-count">9 listings</span></div>
+      </div>
+      <div class="region-card reveal reveal-delay-2">
+        <img src="images/cheyne-walk.jpg" alt="Yorkshire" loading="lazy" />
+        <div class="region-label">Yorkshire<span class="region-count">11 listings</span></div>
+      </div>
+      <div class="region-card reveal reveal-delay-3">
+        <img src="images/cadogan-gardens.jpg" alt="Scotland" loading="lazy" />
+        <div class="region-label">Scotland<span class="region-count">7 listings</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HOUSELY -->
+<section class="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="reveal">
+        <p class="section-label">WHY HOUSELY</p>
+        <h2 class="section-title" style="margin-bottom:40px;">A Partner for Significant Decisions</h2>
+        <div class="why-list">
+          <div class="why-item"><div class="why-num">01</div><div><div class="why-item-title">Unrivalled Access</div><div class="why-item-desc">Our network encompasses private landowners, estate agents and rural surveyors across every English county.</div></div></div>
+          <div class="why-item"><div class="why-num">02</div><div><div class="why-item-title">Complete Discretion</div><div class="why-item-desc">We understand the sensitivity of large property transactions and manage every aspect confidentially.</div></div></div>
+          <div class="why-item"><div class="why-num">03</div><div><div class="why-item-title">Expert Guidance</div><div class="why-item-desc">From heritage buildings to farmland, our specialists have deep technical knowledge across all estate types.</div></div></div>
+          <div class="why-item"><div class="why-num">04</div><div><div class="why-item-title">End-to-End Service</div><div class="why-item-desc">We coordinate legal, planning, financial and logistical teams so you can focus on your decision.</div></div></div>
+        </div>
+      </div>
+      <div class="why-img reveal reveal-delay-2">
+        <img src="images/grosvenor-street.jpg" alt="Estate grounds" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <h2 class="reveal">Begin Your Estate Search</h2>
+  <p class="reveal reveal-delay-1">Our country house specialists maintain a private register of estates not yet listed publicly. Contact us to discuss your requirements.</p>
+  <div class="reveal reveal-delay-2">
+    <a href="advisory.html#contact" class="btn-gold">SPEAK TO A SPECIALIST</a>
+    <a href="index.html" class="btn-ghost">BACK TO HOME</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-brand">Housely</div><p class="footer-tagline">Curating the world's most architectural homes for the next generation of global citizens.</p></div>
+    <div><div class="footer-col-title">NAVIGATION</div><ul class="footer-list"><li><a href="mayfair.html">MAYFAIR COLLECTION</a></li><li><a href="penthouses.html">PENTHOUSES</a></li><li><a href="advisory.html">ADVISORY</a></li><li><a href="estates.html">ESTATES</a></li></ul></div>
+    <div><div class="footer-col-title">LEGAL &amp; PRIVACY</div><ul class="footer-list"><li><a href="#">TERMS OF SERVICE</a></li><li><a href="#">PRIVACY POLICY</a></li><li><a href="#">COOKIE PREFERENCE</a></li></ul></div>
+    <div><div class="footer-col-title">NEWSLETTER</div><p class="footer-newsletter-text">Receive our seasonal edit of off-market listings and architectural stories.</p><div class="footer-email-row"><input type="email" placeholder="Email Address" /><button>→</button></div></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2024 THE EDITORIAL ESTATE. ALL RIGHTS RESERVED.</span><div class="footer-socials"><a href="#">INSTAGRAM</a><a href="#">LINKEDIN</a><a href="#">YOUTUBE</a></div></div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+  document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+  function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');}
+  const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',function(){document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
+</script>
+</body>
+</html>

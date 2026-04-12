@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="Favicon.png">
+<title>Get In Touch — Housely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;600;700&family=Noto+Serif:wght@400&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #faf9f6;
+  --cream-alt: #f4f4f0;
+  --dark: #2f3430;
+  --gold: #d4af37;
+  --gold-dark: #6d5f07;
+  --gold-border: #ad9a1f;
+  --muted: #5c605c;
+  --footer-bg: #1a1a1a;
+  --nav-h: 72px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Manrope', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(24px, 5.5vw, 100px); height: var(--nav-h);
+  background: #fff; box-shadow: 0 1px 16px rgba(0,0,0,.07);
+}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: clamp(18px,2vw,24px); letter-spacing: -1.2px; color: var(--dark); text-decoration: none; }
+.nav-links { display: flex; gap: clamp(20px,3vw,48px); list-style: none; }
+.nav-link { font-family: 'Playfair Display', serif; font-size: clamp(11px,1.1vw,16px); letter-spacing: 1.92px; color: var(--dark); text-decoration: none; transition: opacity .25s; }
+.nav-link:hover { opacity: .55; }
+.nav-link.active { border-bottom: 1.5px solid var(--gold-dark); padding-bottom: 2px; }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.nav-cta { font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--dark); border: 1px solid var(--dark); padding: 9px 25px; text-decoration: none; transition: background .25s, color .25s; }
+.nav-cta:hover { background: var(--dark); color: #fff; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+.nav-hamburger span { display: block; width: 24px; height: 1.5px; background: var(--dark); }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--cream); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-menu a { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--dark); text-decoration: none; }
+.mobile-close { position: absolute; top: 24px; right: 24px; font-size: 28px; cursor: pointer; background: none; border: none; color: var(--dark); }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  padding-top: var(--nav-h);
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('images/cadogan-gardens.jpg');
+  background-size: cover; background-position: center;
+  opacity: .18;
+}
+.page-hero-inner {
+  position: relative;
+  max-width: 1600px; margin: 0 auto;
+  padding: clamp(56px, 8vw, 120px) clamp(24px, 6.25vw, 100px);
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 48px; flex-wrap: wrap;
+}
+.hero-left { max-width: 680px; }
+.hero-label {
+  font-family: 'Manrope', sans-serif; font-weight: 600;
+  font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(38px, 5.5vw, 68px);
+  font-weight: 400; letter-spacing: -1.5px; line-height: 1.06; color: #fff;
+}
+.hero-sub {
+  font-size: clamp(14px, 1.3vw, 17px); line-height: 1.75;
+  color: rgba(255,255,255,.6); margin-top: 20px;
+}
+.hero-contacts {
+  display: flex; flex-direction: column; gap: 20px;
+  align-self: flex-end; padding-bottom: 6px;
+  flex-shrink: 0;
+}
+.hero-contact-item { text-align: right; }
+.hero-contact-label {
+  font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 4px;
+}
+.hero-contact-val { font-size: 14px; color: rgba(255,255,255,.75); }
+
+/* ── GOLD DIVIDER LINE ── */
+.gold-line {
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, var(--gold-border) 0%, transparent 100%);
+  position: relative;
+}
+
+/* ── MAIN CONTENT ── */
+.contact-wrap {
+  max-width: 1600px; margin: 0 auto;
+  padding: clamp(56px, 8vw, 112px) clamp(24px, 6.25vw, 100px);
+  display: grid; grid-template-columns: 1fr 1.6fr;
+  gap: clamp(48px, 7vw, 120px); align-items: start;
+}
+
+/* left info column */
+.info-col {}
+.info-section-label {
+  font-family: 'Manrope', sans-serif; font-weight: 600;
+  font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase;
+  color: var(--gold-dark); margin-bottom: 14px;
+}
+.info-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3vw, 40px); font-weight: 400;
+  letter-spacing: -1px; line-height: 1.1; color: var(--dark);
+  margin-bottom: 20px;
+}
+.info-body { font-size: 15px; line-height: 1.8; color: var(--muted); margin-bottom: 40px; }
+.gold-divider-left { width: 64px; height: 1px; background: var(--gold-border); margin-bottom: 40px; }
+
+.detail-list { display: flex; flex-direction: column; gap: 28px; margin-bottom: 48px; }
+.detail-item {}
+.detail-label {
+  font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--gold-dark); font-weight: 600; margin-bottom: 5px;
+}
+.detail-val { font-size: 15px; color: var(--dark); line-height: 1.5; }
+
+/* response time card */
+.response-card {
+  background: var(--cream-alt);
+  border-left: 2px solid var(--gold-border);
+  padding: 24px 28px;
+}
+.response-card-title { font-family: 'Noto Serif', serif; font-size: 16px; color: var(--dark); margin-bottom: 8px; }
+.response-card-text { font-size: 13px; line-height: 1.7; color: var(--muted); }
+
+/* right form column */
+.form-col {}
+.form-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 2.5vw, 32px); font-weight: 400;
+  letter-spacing: -.5px; color: var(--dark); margin-bottom: 36px;
+}
+
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-label {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); font-weight: 600;
+}
+.form-input, .form-select, .form-textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #c8c4be;
+  padding: 12px 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px; color: var(--dark);
+  outline: none;
+  transition: border-color .3s;
+  width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-bottom-color: var(--gold-dark);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: #b0aca6; }
+.form-select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235c605c' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; }
+.form-textarea { resize: vertical; min-height: 100px; border: none; border-bottom: 1px solid #c8c4be; padding: 12px 0; }
+
+/* checkbox row */
+.form-check { display: flex; align-items: flex-start; gap: 12px; margin-top: 4px; }
+.form-check input[type="checkbox"] { margin-top: 2px; accent-color: var(--gold-dark); flex-shrink: 0; width: 16px; height: 16px; cursor: pointer; }
+.form-check label { font-size: 12px; color: var(--muted); line-height: 1.6; cursor: pointer; }
+
+.btn-submit {
+  font-family: 'Manrope', sans-serif; font-weight: 600;
+  font-size: 13px; letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--cream); background: var(--gold);
+  padding: 18px 44px; border: none; cursor: pointer;
+  transition: background .25s, transform .2s;
+  align-self: flex-start; margin-top: 8px;
+}
+.btn-submit:hover { background: #c49d2a; transform: translateY(-1px); }
+
+/* success message (hidden by default) */
+.form-success {
+  display: none; background: var(--cream-alt);
+  border-left: 2px solid var(--gold-border);
+  padding: 28px 32px; margin-top: 24px;
+}
+.form-success.show { display: block; }
+.form-success-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); margin-bottom: 8px; }
+.form-success-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* ── OFFICES BAND ── */
+.offices { background: var(--cream-alt); padding: clamp(56px,7vw,96px) 0; }
+.offices-inner { max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px,6.25vw,100px); }
+.offices-label { font-size: 11px; letter-spacing: 2.2px; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 12px; font-family: 'Manrope', sans-serif; font-weight: 600; text-align: center; }
+.offices-title { font-family: 'Playfair Display', serif; font-size: clamp(24px,3vw,40px); font-weight: 400; letter-spacing: -1px; color: var(--dark); text-align: center; margin-bottom: 56px; }
+.offices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(24px,4vw,48px); }
+.office-card {
+  background: var(--cream); padding: clamp(28px,3.5vw,48px);
+  border-bottom: 2px solid var(--gold-border);
+  transition: box-shadow .3s, transform .3s;
+}
+.office-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.07); transform: translateY(-3px); }
+.office-city { font-family: 'Noto Serif', serif; font-size: 20px; color: var(--dark); margin-bottom: 16px; }
+.office-details { display: flex; flex-direction: column; gap: 12px; }
+.office-row { display: flex; flex-direction: column; gap: 2px; }
+.office-row-label { font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; }
+.office-row-val { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* ── FOOTER ── */
+footer { background: var(--footer-bg); padding: clamp(48px,5vw,80px) clamp(24px,6.25vw,100px); }
+.footer-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(24px,4vw,48px); padding-bottom: clamp(32px,4vw,56px); }
+.footer-brand { font-family: 'Noto Serif', serif; font-size: 19px; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+.footer-tagline { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: #a8a29e; line-height: 1.65; }
+.footer-col-title { font-family: 'Noto Serif', serif; font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase; color: #fff; margin-bottom: 24px; }
+.footer-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-list a { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: rgba(255,255,255,.7); text-decoration: none; transition: color .2s; }
+.footer-list a:hover { color: var(--gold); }
+.footer-newsletter-text { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: #a8a29e; line-height: 1.65; margin-bottom: 18px; }
+.footer-email-row { display: flex; border: 1px solid #44403c; overflow: hidden; }
+.footer-email-row input { flex: 1; background: transparent; border: none; padding: 12px 14px; font-family: 'Manrope', sans-serif; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #57534e; outline: none; }
+.footer-email-row input::placeholder { color: #57534e; }
+.footer-email-row button { background: transparent; border: none; padding: 0 14px; cursor: pointer; color: #a8a29e; font-size: 14px; transition: color .2s; }
+.footer-email-row button:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.05); padding-top: clamp(20px,2.5vw,36px); margin-top: clamp(12px,1.5vw,24px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-copy { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: #a8a29e; }
+.footer-socials { display: flex; gap: 28px; }
+.footer-socials a { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: rgba(255,255,255,.7); text-decoration: none; transition: color .2s; }
+.footer-socials a:hover { color: var(--gold); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .contact-wrap { grid-template-columns: 1fr; }
+  .hero-contacts { text-align: left; align-self: flex-start; }
+  .hero-contact-item { text-align: left; }
+  .offices-grid { grid-template-columns: repeat(2,1fr); }
+  .footer-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 600px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .mobile-menu { display: flex; }
+  .form-row { grid-template-columns: 1fr; }
+  .offices-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .page-hero-inner { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">HOUSELY</a>
+  <ul class="nav-links">
+    <li><a href="property.html" class="nav-link">PROPERTY</a></li>
+    <li><a href="mayfair.html" class="nav-link">MAYFAIR</a></li>
+    <li><a href="penthouses.html" class="nav-link">PENTHOUSES</a></li>
+    <li><a href="advisory.html" class="nav-link">ADVISORY</a></li>
+    <li><a href="estates.html" class="nav-link">ESTATES</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta active">GET IN TOUCH</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">×</button>
+  <a href="index.html" onclick="closeMobile()">HOME</a>
+  <a href="property.html" onclick="closeMobile()">PROPERTY</a>
+  <a href="mayfair.html" onclick="closeMobile()">MAYFAIR</a>
+  <a href="penthouses.html" onclick="closeMobile()">PENTHOUSES</a>
+  <a href="advisory.html" onclick="closeMobile()">ADVISORY</a>
+  <a href="estates.html" onclick="closeMobile()">ESTATES</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-inner">
+    <div class="hero-left">
+      <p class="hero-label reveal">SPEAK WITH US</p>
+      <h1 class="hero-title reveal reveal-delay-1">Get In Touch</h1>
+      <p class="hero-sub reveal reveal-delay-2">Whether you are looking to buy, sell, let or simply explore your options, our team is available to speak in complete confidence. We respond to all enquiries within one business day.</p>
+    </div>
+    <div class="hero-contacts reveal reveal-delay-2">
+      <div class="hero-contact-item">
+        <div class="hero-contact-label">Direct Line</div>
+        <div class="hero-contact-val">+44 (0)20 7123 4567</div>
+      </div>
+      <div class="hero-contact-item">
+        <div class="hero-contact-label">Email</div>
+        <div class="hero-contact-val">advisory@housely.com</div>
+      </div>
+      <div class="hero-contact-item">
+        <div class="hero-contact-label">Office Hours</div>
+        <div class="hero-contact-val">Mon–Fri, 8am–7pm</div>
+      </div>
+    </div>
+  </div>
+  <div class="gold-line"></div>
+</section>
+
+<!-- ── MAIN CONTACT SECTION ── -->
+<div class="contact-wrap">
+
+  <!-- Left: info -->
+  <div class="info-col reveal">
+    <p class="info-section-label">SPEAK TO US</p>
+    <h2 class="info-title">Request a Confidential Consultation</h2>
+    <p class="info-body">Whether you are buying, selling or seeking advice on your existing portfolio, our team is available to speak in complete confidence. All enquiries are handled discreetly and without obligation.</p>
+    <div class="gold-divider-left"></div>
+
+    <div class="detail-list">
+      <div class="detail-item">
+        <div class="detail-label">London Office</div>
+        <div class="detail-val">10 Grosvenor Square<br>Mayfair, London W1K 6JP</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Direct Line</div>
+        <div class="detail-val">+44 (0)20 7123 4567</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Email</div>
+        <div class="detail-val">advisory@housely.com</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Office Hours</div>
+        <div class="detail-val">Monday – Friday, 8am – 7pm<br>Saturday, 9am – 5pm</div>
+      </div>
+    </div>
+
+    <div class="response-card">
+      <div class="response-card-title">Our Promise</div>
+      <div class="response-card-text">Every enquiry is handled personally by a member of our advisory team. We respond within one business day, and all conversations are treated with the utmost discretion.</div>
+    </div>
+  </div>
+
+  <!-- Right: form -->
+  <div class="form-col reveal reveal-delay-1">
+    <div class="form-title">Send an Enquiry</div>
+    <form class="contact-form" id="contactForm" novalidate>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="firstName">First Name</label>
+          <input class="form-input" type="text" id="firstName" placeholder="James" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lastName">Last Name</label>
+          <input class="form-input" type="text" id="lastName" placeholder="Harrington" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email Address</label>
+        <input class="form-input" type="email" id="email" placeholder="james@example.com" required />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="telephone">Telephone</label>
+        <input class="form-input" type="tel" id="telephone" placeholder="+44 (0)..." />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="service">Service Required</label>
+          <select class="form-select form-input" id="service">
+            <option value="">Select a service…</option>
+            <option>Prime Sales</option>
+            <option>Strategic Lettings</option>
+            <option>Asset Advisory</option>
+            <option>Interior Design</option>
+            <option>Mayfair Collection</option>
+            <option>Country Estates</option>
+            <option>Penthouses</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="budget">Approximate Budget</label>
+          <select class="form-select form-input" id="budget">
+            <option value="">Select a range…</option>
+            <option>Under £2,000,000</option>
+            <option>£2M – £5M</option>
+            <option>£5M – £10M</option>
+            <option>£10M – £20M</option>
+            <option>£20M+</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="message">Message</label>
+        <textarea class="form-textarea" id="message" placeholder="Please describe your requirements, preferred areas and timescales…" required></textarea>
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" id="consent" required />
+        <label for="consent">I consent to Housely storing my details and contacting me regarding my enquiry. I understand my data will be handled in accordance with the <a href="#" style="color:var(--gold-dark);">Privacy Policy</a>.</label>
+      </div>
+
+      <button class="btn-submit" type="submit">SEND ENQUIRY</button>
+
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-title">Thank you for your enquiry.</div>
+        <div class="form-success-text">A member of our advisory team will be in touch within one business day. We look forward to speaking with you.</div>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<!-- ── OFFICES ── -->
+<section class="offices">
+  <div class="offices-inner">
+    <p class="offices-label reveal">OUR OFFICES</p>
+    <h2 class="offices-title reveal reveal-delay-1">Where to Find Us</h2>
+    <div class="offices-grid">
+      <div class="office-card reveal reveal-delay-1">
+        <div class="office-city">London</div>
+        <div class="office-details">
+          <div class="office-row"><span class="office-row-label">Address</span><span class="office-row-val">10 Grosvenor Square, Mayfair, W1K 6JP</span></div>
+          <div class="office-row"><span class="office-row-label">Telephone</span><span class="office-row-val">+44 (0)20 7123 4567</span></div>
+          <div class="office-row"><span class="office-row-label">Hours</span><span class="office-row-val">Mon–Fri 8am–7pm · Sat 9am–5pm</span></div>
+        </div>
+      </div>
+      <div class="office-card reveal reveal-delay-2">
+        <div class="office-city">New York</div>
+        <div class="office-details">
+          <div class="office-row"><span class="office-row-label">Address</span><span class="office-row-val">432 Park Avenue, Midtown, NY 10022</span></div>
+          <div class="office-row"><span class="office-row-label">Telephone</span><span class="office-row-val">+1 (212) 555 0147</span></div>
+          <div class="office-row"><span class="office-row-label">Hours</span><span class="office-row-val">Mon–Fri 9am–6pm ET</span></div>
+        </div>
+      </div>
+      <div class="office-card reveal reveal-delay-3">
+        <div class="office-city">Hong Kong</div>
+        <div class="office-details">
+          <div class="office-row"><span class="office-row-label">Address</span><span class="office-row-val">Two IFC, 8 Finance Street, Central</span></div>
+          <div class="office-row"><span class="office-row-label">Telephone</span><span class="office-row-val">+852 2123 4567</span></div>
+          <div class="office-row"><span class="office-row-label">Hours</span><span class="office-row-val">Mon–Fri 9am–6pm HKT</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Housely</div>
+      <p class="footer-tagline">Curating the world's most architectural homes for the next generation of global citizens.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">NAVIGATION</div>
+      <ul class="footer-list">
+        <li><a href="mayfair.html">MAYFAIR COLLECTION</a></li>
+        <li><a href="penthouses.html">PENTHOUSES</a></li>
+        <li><a href="advisory.html">ADVISORY</a></li>
+        <li><a href="estates.html">ESTATES</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">LEGAL &amp; PRIVACY</div>
+      <ul class="footer-list">
+        <li><a href="#">TERMS OF SERVICE</a></li>
+        <li><a href="#">PRIVACY POLICY</a></li>
+        <li><a href="#">COOKIE PREFERENCE</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">NEWSLETTER</div>
+      <p class="footer-newsletter-text">Receive our seasonal edit of off-market listings and architectural stories.</p>
+      <div class="footer-email-row">
+        <input type="email" placeholder="Email Address" aria-label="Email address" />
+        <button type="button" aria-label="Subscribe">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 THE EDITORIAL ESTATE. ALL RIGHTS RESERVED.</span>
+    <div class="footer-socials">
+      <a href="#">INSTAGRAM</a>
+      <a href="#">LINKEDIN</a>
+      <a href="#">YOUTUBE</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('mobileMenu').classList.add('open');
+  });
+  document.getElementById('mobileClose').addEventListener('click', function() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  });
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Scroll reveal
+  window.addEventListener('DOMContentLoaded', function() {
+    var items = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function(el) { observer.observe(el); });
+  });
+
+  // Form submit
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var firstName = document.getElementById('firstName').value.trim();
+    var email     = document.getElementById('email').value.trim();
+    var consent   = document.getElementById('consent').checked;
+    if (!firstName || !email || !consent) {
+      this.querySelectorAll(':invalid').forEach(function(el) {
+        el.style.borderBottomColor = '#c0392b';
+        el.addEventListener('input', function() {
+          el.style.borderBottomColor = '';
+        }, { once: true });
+      });
+      return;
+    }
+    document.getElementById('formSuccess').classList.add('show');
+    document.querySelector('.btn-submit').style.display = 'none';
+    window.scrollTo({ top: document.getElementById('formSuccess').offsetTop - 100, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
