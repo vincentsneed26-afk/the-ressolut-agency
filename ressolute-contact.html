@@ -473,8 +473,11 @@
     <div id="contact-form" class="reveal" style="transition-delay:0.1s">
       <form id="the-form" novalidate>
 
-        <!-- Destination email -->
-        <input type="hidden" name="to" value="cryptokrill@protonmail.com" />
+        <!-- Web3Forms — replace YOUR_ACCESS_KEY with your key from web3forms.com (free) -->
+        <input type="hidden" name="access_key" value="0f273493-1c7b-4aa9-afb0-67911567dd63" />
+        <input type="hidden" name="subject" value="New enquiry — The ResSolut Agency website" />
+        <input type="hidden" name="from_name" value="ResSolut Website" />
+        <input type="hidden" name="redirect" value="false" />
 
         <div class="form-group">
           <label for="fname">Your name:</label>
@@ -512,7 +515,7 @@
         <button type="submit" class="btn-submit">Submit</button>
 
         <p class="form-legal">
-          By clicking submit, you agree to our <a href="#">terms and conditions</a>
+          By clicking submit, you agree to our <a href="ressolute-terms.html">terms and conditions</a>
         </p>
 
       </form>
@@ -534,7 +537,7 @@
       <p style="font-size: 15px; color: #666; line-height: 1.6; margin-bottom: 32px; max-width: 360px; margin-left: auto; margin-right: auto;">
         Thanks for getting in touch — we'll be back with you as soon as possible.
       </p>
-      <a href="https://vincentsneed26-afk.github.io/ressolute/" style="
+      <a href="index.html" style="
         display: inline-flex; align-items: center; gap: 8px;
         background: var(--purple); color: white;
         padding: 14px 32px; border-radius: 9999px;
@@ -576,25 +579,25 @@
     <div class="footer-col">
       <div class="footer-col-title">Use cases</div>
       <a href="ressolute-services.html" class="footer-link">Services</a>
-      <a href="ressolute-landing.html" class="footer-link">Solutions</a>
+      <a href="article-systems.html" class="footer-link">AI Systems</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Explore</div>
       <a href="ressolute-blog.html" class="footer-link">Blog</a>
-      <a href="ressolute-landing.html" class="footer-link">Helping hands</a>
-      <a href="ressolute-landing.html" class="footer-link">The human touch</a>
+      <a href="article-partnership.html" class="footer-link">AI Partnership</a>
+      <a href="article-problem-solving.html" class="footer-link">Problem Solving</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Resources</div>
       <a href="ressolute-blog.html" class="footer-link">Blog</a>
       <a href="ressolute-pricing.html" class="footer-link">Pricing</a>
-      <a href="ressolute-contact.html" class="footer-link">Terms &amp; Conditions</a>
+      <a href="ressolute-terms.html" class="footer-link">Terms &amp; Conditions</a>
     </div>
   </div>
   <div class="footer-divider"></div>
   <div class="footer-bottom">
     <span>© The ResSolut Agency 2026</span>
-    <span>Privacy Policy &nbsp;•&nbsp; Cookies &nbsp;•&nbsp; Terms and Conditions</span>
+    <span><a href="ressolute-terms.html#section-6" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Privacy Policy</a> &nbsp;•&nbsp; <a href="ressolute-terms.html#section-5" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Cookies</a> &nbsp;•&nbsp; <a href="ressolute-terms.html" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Terms and Conditions</a></span>
   </div>
   </div>
 </footer>
@@ -618,9 +621,29 @@
   }, { threshold: 0.1 });
   revealEls.forEach(el => observer.observe(el));
 
-  // Form submission — opens pre-filled mailto and shows success screen
+  // Form submission
   const form = document.getElementById('the-form');
-  form.addEventListener('submit', (e) => {
+  const submitBtn = form.querySelector('.btn-submit');
+
+  function showSuccess() {
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('success-message').style.display = 'block';
+    document.querySelector('.contact-heading').style.display = 'none';
+  }
+
+  function buildMailto(name, email, phone, interest, message) {
+    const subject = encodeURIComponent('New enquiry — The ResSolut Agency website');
+    const body = encodeURIComponent(
+      'Name: ' + name +
+      '\nEmail: ' + email +
+      '\nPhone: ' + (phone || 'Not provided') +
+      '\nInterest: ' + (interest || 'Not specified') +
+      '\n\nMessage:\n' + message
+    );
+    return 'mailto:vincentsneed26@gmail.com?subject=' + subject + '&body=' + body;
+  }
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name     = document.getElementById('fname').value.trim();
@@ -629,25 +652,47 @@
     const interest = document.getElementById('finterest').value;
     const message  = document.getElementById('fmsg').value.trim();
 
-    // Basic validation
     if (!name || !email || !message) {
       alert('Please fill in your name, email and message before submitting.');
       return;
     }
 
-    // Build mailto link
-    const subject = encodeURIComponent('New enquiry from Ressolute website');
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nInterest: ${interest || 'Not specified'}\n\nMessage:\n${message}`
-    );
-    window.location.href = `mailto:cryptokrill@protonmail.com?subject=${subject}&body=${body}`;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
 
-    // Show success screen immediately after opening mail client
-    setTimeout(() => {
-      document.getElementById('contact-form').style.display = 'none';
-      document.getElementById('success-message').style.display = 'block';
-      document.querySelector('.contact-heading').style.display = 'none';
-    }, 500);
+    // Check if a real Web3Forms key has been set
+    const accessKey = form.querySelector('[name="access_key"]').value;
+    const hasRealKey = accessKey && accessKey !== 'YOUR_ACCESS_KEY';
+
+    let web3Success = false;
+
+    if (hasRealKey) {
+      try {
+        const formData = new FormData(form);
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+        const result = await response.json();
+        if (result.success) {
+          web3Success = true;
+        } else {
+          console.warn('Web3Forms response:', result.message);
+        }
+      } catch (err) {
+        console.warn('Web3Forms fetch failed (may be a local file restriction):', err.message);
+      }
+    }
+
+    if (web3Success) {
+      // Web3Forms worked — show success screen
+      showSuccess();
+    } else {
+      // Fallback: open the user's mail client with the message pre-filled
+      window.location.href = buildMailto(name, email, phone, interest, message);
+      // Show success screen after a short delay
+      setTimeout(showSuccess, 600);
+    }
   });
 </script>
 </body>

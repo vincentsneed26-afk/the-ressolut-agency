@@ -114,7 +114,7 @@
 
   /* CTA BLOCK */
   .article-cta {
-    background: linear-gradient(135deg, #140d26 0%, #2d1860 60%, #7847db 100%);
+    background: white; border: 1.5px solid #e2e2e8;
     border-radius: 20px;
     padding: 56px 48px;
     text-align: center;
@@ -122,11 +122,11 @@
     position: relative;
     overflow: hidden;
   }
-  .article-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 100%, rgba(120,71,219,0.5) 0%, transparent 70%); }
+  .article-cta::before { content: none; }
   .article-cta > * { position: relative; z-index: 1; }
-  .article-cta h2 { font-size: 28px; font-weight: 700; color: white; margin-bottom: 12px; line-height: 1.2; }
-  .article-cta p { font-size: 16px; color: rgba(255,255,255,0.75); margin-bottom: 32px; max-width: 440px; margin-left: auto; margin-right: auto; }
-  .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: white; color: var(--purple); padding: 14px 32px; border-radius: 9999px; font-size: 15px; font-weight: 700; text-decoration: none; transition: transform var(--transition), box-shadow var(--transition); }
+  .article-cta h2 { font-size: 28px; font-weight: 700; color: #140d26; margin-bottom: 12px; line-height: 1.2; }
+  .article-cta p { font-size: 16px; color: #666680; margin-bottom: 32px; max-width: 440px; margin-left: auto; margin-right: auto; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--purple); color: white; padding: 14px 32px; border-radius: 9999px; font-size: 15px; font-weight: 700; text-decoration: none; transition: transform var(--transition), box-shadow var(--transition); }
   .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
   .cta-btn svg { transition: transform var(--transition); }
   .cta-btn:hover svg { transform: translateX(3px); }
@@ -297,13 +297,13 @@
       <div class="footer-col-title">Resources</div>
       <a href="ressolute-blog.html" class="footer-link">Blog</a>
       <a href="ressolute-pricing.html" class="footer-link">Pricing</a>
-      <a href="ressolute-contact.html" class="footer-link">Terms &amp; Conditions</a>
+      <a href="ressolute-terms.html" class="footer-link">Terms &amp; Conditions</a>
     </div>
   </div>
   <div class="footer-divider"></div>
   <div class="footer-bottom">
     <span>© The ResSolut Agency 2026</span>
-    <span>Privacy Policy &nbsp;•&nbsp; Cookies &nbsp;•&nbsp; Terms and Conditions</span>
+    <span><a href="ressolute-terms.html#section-6" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Privacy Policy</a> &nbsp;•&nbsp; <a href="ressolute-terms.html#section-5" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Cookies</a> &nbsp;•&nbsp; <a href="ressolute-terms.html" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Terms and Conditions</a></span>
   </div>
   </div>
 </footer>
