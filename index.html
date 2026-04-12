@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="Favicon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="Favicon.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="Favicon.png" />
+<title>AI Project Management Consulting UK | The ResSolute Agency</title>
+<meta name="description" content="The ResSolute Agency helps UK businesses solve complex problems and deliver projects faster using AI tools including ChatGPT, NotebookLM, Perplexity and Claude. Get expert AI consulting today." />
+<link rel="canonical" href="https://www.theressolute.agency/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.theressolute.agency/" />
+<meta property="og:title" content="AI Project Management Consulting UK | The ResSolute Agency" />
+<meta property="og:description" content="The ResSolute Agency helps UK businesses solve complex problems and deliver projects faster using AI tools including ChatGPT, NotebookLM, Perplexity and Claude." />
+<meta property="og:image" content="https://www.theressolute.agency/og-image.png" />
+<meta property="og:site_name" content="The ResSolute Agency" />
+<meta property="og:locale" content="en_GB" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Project Management Consulting UK | The ResSolute Agency" />
+<meta name="twitter:description" content="UK's AI-powered consulting agency. We use ChatGPT, NotebookLM, Perplexity and Claude to solve your toughest business problems." />
+<meta name="twitter:image" content="https://www.theressolute.agency/og-image.png" />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "The ResSolute Agency",
+  "url": "https://www.theressolute.agency",
+  "logo": "https://www.theressolute.agency/Favicon.png",
+  "description": "UK-based AI consulting agency specialising in project management and problem solving using ChatGPT, NotebookLM, Perplexity AI and Claude Code.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "GB"
+  },
+  "areaServed": "GB",
+  "serviceType": ["AI Consulting", "Project Management", "Business Problem Solving", "AI Strategy"],
+  "sameAs": []
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ─── Reset & Base ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #f2f2f7; color: #140d26; overflow-x: hidden; }
+
+  /* ─── CSS Variables ─── */
+  :root {
+    --purple: #7847db;
+    --purple-dark: #5c35b8;
+    --purple-light: #e5dbff;
+    --text-dark: #140d26;
+    --text-mid: #33264d;
+    --text-muted: #666680;
+    --text-soft: #666;
+    --white: #ffffff;
+    --bg-light: #f7f7fc;
+    --border: #d9d9d9;
+    --shadow-card: 0 4px 16px rgba(77,51,128,0.06);
+    --shadow-float: 0 8px 24px rgba(0,0,0,0.12);
+    --radius-card: 16px;
+    --radius-pill: 9999px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ─── Sticky Nav ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 32px;
+    transition: box-shadow var(--transition), background var(--transition);
+  }
+  nav.scrolled {
+    box-shadow: 0 4px 20px rgba(120,71,219,0.12);
+    background: rgba(255,255,255,0.97);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: opacity var(--transition);
+  }
+  .nav-logo:hover { opacity: 0.82; }
+      .nav-logo-img {
+    height: 42px;
+    width: 199px;
+    object-fit: contain;
+    object-position: left center;
+    display: block;
+    flex-shrink: 0;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .nav-pill {
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), transform var(--transition);
+    text-decoration: none;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-pill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--purple);
+    opacity: 0;
+    border-radius: 8px;
+    transition: opacity var(--transition);
+  }
+  .nav-pill:hover::after { opacity: 0.06; }
+  .nav-pill:hover { transform: translateY(-1px); }
+  .nav-pill.active { background: #f5f5f5; font-weight: 700; }
+
+  .nav-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .btn-primary {
+    background: var(--purple);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+  }
+  .btn-primary:hover::before { width: 300px; height: 300px; opacity: 1; }
+  .btn-primary:hover {
+    background: var(--purple-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(120,71,219,0.38);
+  }
+  .btn-primary:active { transform: translateY(0); box-shadow: none; }
+
+  .btn-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #f5f5f5;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+    flex-shrink: 0;
+  }
+  .btn-icon:hover {
+    background: var(--purple-light);
+    transform: rotate(90deg) scale(1.08);
+  }
+
+  /* ─── Hero ─── */
+  .hero {
+    background: #f2f2f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 72px 80px 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 620px;
+  }
+
+  /* Figma wave graphic — fills the top portion of the hero */
+  .hero-wave {
+    position: absolute;
+    top: 0; left: -5%;
+    width: 110%;
+    height: 92%;
+    object-fit: cover;
+    object-position: top center;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* All hero content sits above the wave */
+  .hero > *:not(.hero-wave) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    background: rgba(255,255,255,0.85);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--purple);
+    margin-bottom: 24px;
+  }
+
+  .hero-headline {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .hero-headline h1 {
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+  }
+  .hero-headline .hero-pill-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  .hero-headline .word-with {
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+  .hero-brand-pill {
+    color: white;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.88);
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 520px;
+    margin-bottom: 40px;
+  }
+
+  /* ─── Floating Mockup Cards ─── */
+  .hero-mockup-area {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+    margin-top: 8px;
+  }
+  .mockup-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-float);
+    padding: 16px;
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+  }
+  .mockup-card.history {
+    width: 200px;
+    z-index: 2;
+    margin-right: -30px;
+    animation-delay: 0.5s;
+  }
+  .mockup-card.history h4 { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
+  .mockup-card.history p { font-size: 12px; line-height: 1.8; color: var(--text-mid); }
+  .mockup-card.history .neg { color: #cc3333; }
+
+  .phone-mockup {
+    width: 180px;
+    height: 300px;
+    background: #140d26;
+    border-radius: 28px;
+    overflow: hidden;
+    z-index: 3;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 0s;
+    flex-shrink: 0;
+  }
+  .phone-inner {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 24px;
+    padding: 20px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  .phone-grid {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 19px, #f0f0f0 19px, #f0f0f0 20px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 19px, #f0f0f0 19px, #f0f0f0 20px
+    );
+    opacity: 0.5;
+    mask-image: linear-gradient(180deg, black 0%, transparent 100%);
+  }
+  .phone-logo-icon {
+    width: 32px; height: 32px;
+    background: var(--purple);
+    border-radius: 8px;
+    margin-top: 28px;
+    flex-shrink: 0;
+  }
+  .phone-tagline { font-size: 8px; font-weight: 700; color: var(--text-dark); text-align: center; line-height: 1.4; }
+  .phone-sub { font-size: 5.5px; color: var(--text-muted); text-align: center; line-height: 1.5; max-width: 100px; }
+  .phone-form-row { display: flex; gap: 4px; width: 100%; }
+  .phone-input {
+    flex: 1;
+    height: 18px;
+    border: 0.5px solid #edf1f3;
+    border-radius: 6px;
+    background: #fafafa;
+  }
+  .phone-input-full {
+    width: 100%;
+    height: 18px;
+    border: 0.5px solid #edf1f3;
+    border-radius: 6px;
+    background: #fafafa;
+  }
+  .phone-btn {
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(90deg, #1d61e7, #1d61e7);
+    border-radius: 6px;
+    margin-top: 4px;
+  }
+
+  .mockup-card.income {
+    width: 170px;
+    z-index: 2;
+    margin-left: -30px;
+    animation-delay: 1s;
+  }
+  .mockup-card.income h4 { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+  .mockup-card.income .amount { font-size: 22px; font-weight: 700; color: var(--text-dark); }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ─── Social Proof ─── */
+  .social-proof {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 44px 80px;
+  }
+  .social-proof p {
+    color: var(--text-soft);
+    font-size: 15px;
+    text-align: center;
+  }
+  .logo-strip {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .logo-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: default;
+    transition: transform var(--transition), background var(--transition);
+  }
+  .logo-item:hover {
+    background: var(--purple-light);
+    transform: translateY(-3px);
+  }
+  .logo-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--text-dark);
+    flex-shrink: 0;
+    transition: transform var(--transition), background var(--transition);
+  }
+  .logo-item:hover .logo-dot {
+    background: var(--purple);
+    transform: scale(1.2) rotate(180deg);
+  }
+  .logo-item span { font-size: 15px; font-weight: 700; color: #262626; }
+
+  /* ─── Section Shared ─── */
+  section { width: 100%; }
+  .section-badge {
+    background: var(--purple-light);
+    color: var(--purple);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+  .section-badge .star {
+    display: inline-block;
+    transition: transform 0.6s ease;
+  }
+  .section-badge:hover .star { transform: rotate(180deg) scale(1.3); }
+
+  .section-heading {
+    text-align: center;
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin-bottom: 40px;
+  }
+  .section-heading .accent { color: var(--purple); }
+
+  /* ─── Feature Cards ─── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+  }
+  .cards-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .feature-card {
+    background: white;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform var(--transition), box-shadow var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), #a78bfa);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .feature-card:hover::before { transform: scaleX(1); }
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(77,51,128,0.13);
+  }
+  .feature-card h3 { font-size: 19px; font-weight: 700; color: var(--text-dark); line-height: 1.3; }
+  .feature-card p { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+
+  .icon-box {
+    width: 48px; height: 48px;
+    background: var(--purple);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .icon-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+  .feature-card:hover .icon-box {
+    transform: rotate(-8deg) scale(1.12);
+    box-shadow: 0 8px 20px rgba(120,71,219,0.4);
+    background: var(--purple-dark);
+  }
+  .feature-card:hover .icon-box::after { opacity: 1; }
+  .icon-box svg { color: white; flex-shrink: 0; }
+
+  /* ─── Sections containers ─── */
+  .workflow-section {
+    background: linear-gradient(182deg, #f7f7fc 67%, rgba(174,146,237,0.4) 188%);
+    padding: 72px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .promise-section {
+    background: #f7f7fc;
+    padding: 72px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .promise-section::before {
+    content: '';
+    position: absolute;
+    right: -120px; top: 20%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(174,146,237,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ─── Contact CTA Banner ─── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--purple) 0%, #5c35b8 100%);
+    padding: 80px 40px;
+  }
+  .cta-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-text h2 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 700;
+    color: white;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .cta-text p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+  .cta-btn {
+    background: white;
+    color: var(--purple);
+    padding: 16px 36px;
+    border-radius: var(--radius-pill);
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: rgba(120,71,219,0.1);
+    border-radius: 50%;
+    transform: translate(-50%,-50%);
+    transition: width 0.5s, height 0.5s, opacity 0.5s;
+    opacity: 0;
+  }
+  .cta-btn:hover::before { width: 400px; height: 400px; opacity: 1; }
+  .cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+  }
+  .cta-btn:active { transform: translateY(0); }
+
+  /* ─── Footer ─── */
+  .footer-inner { max-width: 1250px; width: 100%; margin: 0 auto; }
+  footer {
+    background: #434343;
+    padding: 40px 40px 60px;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-top { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; align-items: flex-start; }
+  .footer-brand { display: flex; flex-direction: row; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .footer-logo {
+    display: flex; align-items: center; justify-content: center;
+    transition: transform var(--transition);
+  }
+  .footer-logo:hover {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  .footer-socials { display: flex; gap: 14px; align-items: center; }
+  .social-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.08);
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    cursor: pointer;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+  }
+  .social-icon:hover {
+    background: var(--purple);
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 6px 16px rgba(120,71,219,0.5);
+    color: white;
+  }
+  .social-icon svg { display: block; }
+
+  .footer-links { display: contents; }
+  .footer-col { display: flex; flex-direction: column; gap: 10px; }
+  .footer-col-title { color: white; font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+  .footer-link {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    cursor: pointer;
+    transition: color var(--transition), padding-left var(--transition);
+    text-decoration: none;
+  }
+  .footer-link:hover { color: white; padding-left: 4px; }
+
+  .footer-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin: 32px 0;
+  }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ─── Mobile ─── */
+  @media (max-width: 768px) {
+    /* Hide nav links and logo wordmark — keep icon only */
+    .nav-links { display: none; }
+    .nav-logo {
+      width: 39px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .nav-logo-img {
+      height: 42px;
+      width: 202px;
+      object-fit: none;
+      object-position: left center;
+      flex-shrink: 0;
+    }
+
+    /* Logo pushed left, CTA group pushed right */
+    nav {
+      padding: 14px 20px;
+      gap: 0;
+      justify-content: space-between;
+    }
+
+    /* Hero wave: natural size, centred, never scaled */
+    .hero-wave {
+      width: auto;
+      height: auto;
+      min-width: 0;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      object-fit: none;
+      object-position: top center;
+    }
+
+    /* Cards: single column stack */
+    .cards-grid,
+    .cards-grid-4 { grid-template-columns: 1fr; }
+
+    /* Hero: solid purple background, no wave */
+    .cta-inner { flex-direction: column; text-align: center; }
+    .cta-btn { width: 100%; text-align: center; }
+    .workflow-section,
+    .promise-section { padding: 48px 20px; }
+    .hero { background: var(--purple); padding: 56px 24px 0; }
+    .hero-wave { display: none; }
+  }
+
+  /* ─── Scroll-reveal animation ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-32px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(32px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+  /* Staggered children */
+  .stagger > * { opacity: 0; transform: translateY(28px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+  .stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
+  .stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.2s; }
+  .stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.3s; }
+  .stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.4s; }
+
+  /* Hero initial animation */
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge { animation: heroFadeUp 0.7s ease 0.1s both; }
+  .hero-headline { animation: heroFadeUp 0.7s ease 0.25s both; }
+  .hero-sub { animation: heroFadeUp 0.7s ease 0.4s both; }
+  .hero-mockup-area { animation: heroFadeUp 0.8s ease 0.55s both; }
+
+  /* ─── Divider ─── */
+  .divider { height: 1px; background: var(--border); width: 100%; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">
+    <img class="nav-logo-img" src="images/logo.svg" alt="ResSolut Agency" />
+  </a>
+  <div class="nav-links">
+    <a class="nav-pill" href="ressolute-services.html">Services</a>
+    <a class="nav-pill" href="ressolute-about.html">About</a>
+    <a class="nav-pill" href="ressolute-blog.html">Blog</a>
+    <a class="nav-pill" href="ressolute-pricing.html">Pricing</a>
+  </div>
+  <div class="nav-cta-group">
+    <a href="ressolute-contact.html" class="btn-primary">Contact us</a>
+    <a href="ressolute-menu.html" class="btn-icon" aria-label="Menu">
+      <img src="images/icon-burger.svg" alt="" width="18" height="18" style="display:block;" />
+    </a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<div class="hero">
+  <img class="hero-wave" src="images/hero-wave.svg" alt="" />
+
+  <div class="hero-badge">✦ &nbsp;Best Project Management</div>
+
+  <div class="hero-headline">
+    <h1>Supercharge your next project<br>with <span class="hero-brand-pill">ResSolut</span></h1>
+  </div>
+
+  <p class="hero-sub">
+    Streamline your business's project management with our intuitive, scalable Ai interface.
+    Designed for everybody, our solutions simplify complex processes.
+  </p>
+
+  <div class="hero-mockup-area">
+    <!-- History Card -->
+    <div class="mockup-card history">
+      <h4>History</h4>
+      <p>North Faxe &nbsp; +$200</p>
+      <p class="neg">North Faxe &nbsp; -$400</p>
+    </div>
+
+    <!-- Phone Mockup — real iPhone X image from Figma -->
+    <div class="phone-mockup">
+      <img
+        src="images/iphone-mockup.png"
+        alt="App mockup on iPhone X"
+        style="position:absolute; width:407px; height:590px; left:-167px; top:-76px; max-width:none; object-fit:cover; pointer-events:none;"
+      />
+    </div>
+
+    <!-- Income Card -->
+    <div class="mockup-card income">
+      <h4>Income</h4>
+      <div class="amount">$2,999</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SOCIAL PROOF ═══════════════════════ -->
+<div class="social-proof">
+  <p class="reveal">Trusted over 300 people</p>
+  <div class="logo-strip stagger">
+    <div class="logo-item"><div class="logo-dot"></div><span>Logoipsum</span></div>
+    <div class="logo-item"><div class="logo-dot"></div><span>Logoipsum</span></div>
+    <div class="logo-item"><div class="logo-dot"></div><span>Logoipsum</span></div>
+    <div class="logo-item"><div class="logo-dot"></div><span>Logoipsum</span></div>
+    <div class="logo-item"><div class="logo-dot"></div><span>Logoipsum</span></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ WORKFLOW ═══════════════════════ -->
+<section class="workflow-section">
+  <div class="section-badge reveal"><span class="star">✦</span> Our workflow</div>
+  <div class="section-heading reveal">
+    We make Ai solutions<br><span class="accent">easy</span>
+  </div>
+  <div class="cards-grid stagger" style="max-width:1100px;width:100%;">
+    <div class="feature-card">
+      <div class="icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <h3>Contact us for an in-person evaluation</h3>
+      <p>Create your account in minutes and tailor the platform to meet your company's unique financial needs.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+      <h3>Let us do the heavy lifting</h3>
+      <p>Easily link your bank accounts, credit cards, loans, and investment accounts for seamless management.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ PROMISE ═══════════════════════ -->
+<section class="promise-section">
+  <div class="section-badge reveal"><span class="star">✦</span> Our promise</div>
+  <div class="section-heading reveal">
+    We solve problems<br><span class="accent">with Ai</span>
+  </div>
+  <div class="cards-grid cards-grid-4 stagger" style="max-width:1200px;width:100%;">
+    <div class="feature-card">
+      <div class="icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <h3>We make the complicated simple</h3>
+      <p>We simplify the complex world of problems, making it easy for you to manage your company's needs.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      </div>
+      <h3>We can help you with your deadline</h3>
+      <p>We understand that deadlines can be daunting. Let us assist you in meeting your goals.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9"/>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+      </div>
+      <h3>We add the personal touch to Ai content</h3>
+      <p>We provide a personal touch to all Ai interactions, leaving you in the capable hands of a human.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <h3>Let us do the heavy lifting</h3>
+      <p>Tell us about your project and we'll take the weight off your shoulders, leaving you to do what matters most.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CONTACT CTA ═══════════════════════ -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner reveal">
+    <div class="cta-text">
+      <h2>Ready to supercharge<br>your next project?</h2>
+      <p>Tell us what you're working on and we'll be in touch within 24 hours.</p>
+    </div>
+    <a href="ressolute-contact.html" class="cta-btn">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="footer-inner">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="images/logo-r-icon.svg" alt="Ressolute" style="width:39px;height:42px;object-fit:contain;display:block;" />
+      </div>
+      <div class="footer-socials">
+        <a href="#" class="social-icon" aria-label="X / Twitter">
+          <img src="images/icon-x.svg" alt="X" width="24" height="24" style="display:block;opacity:0.7;" />
+        </a>
+        <a href="#" class="social-icon" aria-label="Instagram">
+          <img src="images/icon-instagram.svg" alt="Instagram" width="24" height="24" style="display:block;opacity:0.7;" />
+        </a>
+        <a href="#" class="social-icon" aria-label="YouTube">
+          <img src="images/icon-youtube.svg" alt="YouTube" width="24" height="24" style="display:block;opacity:0.7;" />
+        </a>
+        <a href="#" class="social-icon" aria-label="LinkedIn">
+          <img src="images/icon-linkedin.svg" alt="LinkedIn" width="24" height="24" style="display:block;opacity:0.7;" />
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Use cases</div>
+      <a href="ressolute-services.html" class="footer-link">Services</a>
+      <a href="ressolute-landing.html" class="footer-link">Solutions</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Explore</div>
+      <a href="ressolute-blog.html" class="footer-link">Blog</a>
+      <a href="ressolute-landing.html" class="footer-link">Helping hands</a>
+      <a href="ressolute-landing.html" class="footer-link">The human touch</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Resources</div>
+      <a href="ressolute-blog.html" class="footer-link">Blog</a>
+      <a href="ressolute-pricing.html" class="footer-link">Pricing</a>
+      <a href="ressolute-contact.html" class="footer-link">Terms &amp; Conditions</a>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span>© The ResSolute Agency 2026</span>
+    <span>Privacy Policy &nbsp;•&nbsp; Cookies &nbsp;•&nbsp; Terms and Conditions</span>
+  </div>
+  </div>
+</footer>
+
+<script>
+  // ─── Sticky nav shadow on scroll ───
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // ─── Scroll-reveal with IntersectionObserver ───
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
