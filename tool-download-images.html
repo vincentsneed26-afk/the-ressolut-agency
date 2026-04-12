@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>ResSolut — Download & Rename Images</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f7f7fc; color: #140d26; min-height: 100vh; }
+
+  .header { background: #140d26; padding: 28px 40px; display: flex; align-items: center; gap: 14px; }
+  .header h1 { color: white; font-size: 22px; font-weight: 700; }
+  .header span { font-size: 26px; }
+
+  .container { max-width: 860px; margin: 40px auto; padding: 0 24px 60px; }
+
+  .intro { background: white; border-radius: 14px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(120,71,219,0.08); margin-bottom: 28px; }
+  .intro h2 { font-size: 18px; font-weight: 700; color: #7847db; margin-bottom: 12px; }
+  .steps { display: flex; flex-direction: column; gap: 8px; }
+  .step { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #444; line-height: 1.5; }
+  .step-num { background: #7847db; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; margin-bottom: 28px; }
+  .image-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(120,71,219,0.08); transition: transform 0.15s, box-shadow 0.15s; }
+  .image-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(120,71,219,0.15); }
+  .image-thumb { width: 100%; height: 160px; object-fit: cover; display: block; background: #f0ebff; }
+  .image-thumb-placeholder { width: 100%; height: 160px; background: linear-gradient(135deg, #f0ebff, #e8deff); display: flex; align-items: center; justify-content: center; font-size: 36px; }
+  .image-info { padding: 14px 16px; }
+  .image-label { font-size: 11px; font-weight: 700; color: #7847db; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .image-name { font-size: 13px; font-family: monospace; color: #333; background: #f0ebff; padding: 4px 8px; border-radius: 6px; word-break: break-all; margin-bottom: 12px; }
+  .image-status { font-size: 12px; color: #888; margin-bottom: 10px; min-height: 16px; }
+  .image-status.downloading { color: #7847db; }
+  .image-status.done { color: #22c55e; font-weight: 600; }
+  .image-status.error { color: #ef4444; }
+
+  .btn-download-one { width: 100%; background: #f0ebff; color: #7847db; border: none; padding: 9px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+  .btn-download-one:hover { background: #e0d5ff; }
+  .btn-download-one:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+  .btn { background: #7847db; color: white; border: none; padding: 14px 32px; border-radius: 999px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+  .btn:hover { background: #5c35b8; }
+  .btn.secondary { background: white; color: #7847db; border: 2px solid #7847db; }
+  .btn.secondary:hover { background: #f0ebff; }
+
+  .notice { background: #fffbeb; border: 1px solid #fbbf24; border-radius: 10px; padding: 16px 20px; font-size: 14px; color: #92400e; line-height: 1.6; margin-bottom: 28px; }
+  .notice strong { display: block; margin-bottom: 4px; }
+
+  .progress-bar-wrap { background: #f0ebff; border-radius: 999px; height: 8px; margin-bottom: 8px; overflow: hidden; display: none; }
+  .progress-bar { background: #7847db; height: 100%; border-radius: 999px; width: 0%; transition: width 0.3s; }
+  .progress-label { font-size: 13px; color: #7847db; font-weight: 600; display: none; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span>🖼️</span>
+  <h1>ResSolut — Download & Rename Images</h1>
+</div>
+
+<div class="container">
+
+  <div class="intro">
+    <h2>How to use this tool</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><span>Click <strong>Download All Images</strong> below — each image will save to your Downloads folder with a descriptive filename.</span></div>
+      <div class="step"><div class="step-num">2</div><span>Move the downloaded files into your <strong>Website/images/</strong> folder.</span></div>
+      <div class="step"><div class="step-num">3</div><span>Then open <strong>tool-fix-url-paths.html</strong> to update your HTML files to point to the local images.</span></div>
+    </div>
+  </div>
+
+  <div class="notice">
+    <strong>⚠️ Note — if downloads don't start automatically:</strong>
+    Your browser may block multiple downloads at once. If prompted, click <em>"Allow"</em> to permit downloads from this page. Or use the individual download buttons on each image card.
+  </div>
+
+  <div class="actions">
+    <button class="btn" onclick="downloadAll()">⬇ Download All Images</button>
+    <button class="btn secondary" onclick="previewAll()">👁 Preview All Images</button>
+  </div>
+
+  <div class="progress-bar-wrap" id="progressWrap">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="progress-label" id="progressLabel"></div>
+
+  <div class="image-grid" id="imageGrid"></div>
+
+</div>
+
+<script>
+// ─── Image definitions ────────────────────────────────────────────────────
+const IMAGES = [
+  {
+    id: "photo-1454165804606-c3d57bc86b40",
+    label: "Article — Problem Solving",
+    filename: "article-problem-solving.jpg",
+    page: "article-problem-solving.html"
+  },
+  {
+    id: "photo-1493612276216-ee3925520721",
+    label: "Article — Strategic Clarity",
+    filename: "article-strategic-clarity.jpg",
+    page: "article-strategic-clarity.html"
+  },
+  {
+    id: "photo-1507003211169-0a1dd7228f2d",
+    label: "Article — Project Management",
+    filename: "article-project-management.jpg",
+    page: "article-project-management.html"
+  },
+  {
+    id: "photo-1522071820081-009f0129c71c",
+    label: "About — Team Collaborating",
+    filename: "about-team-collaborating.jpg",
+    page: "ressolute-about.html"
+  },
+  {
+    id: "photo-1531403009284-440f080d1e12",
+    label: "Article — Systems",
+    filename: "article-systems.jpg",
+    page: "article-systems.html"
+  },
+  {
+    id: "photo-1552664730-d307ca884978",
+    label: "Article — Success Secrets",
+    filename: "article-success-secrets.jpg",
+    page: "article-success-secrets.html"
+  },
+  {
+    id: "photo-1600880292203-757bb62b4baf",
+    label: "Article — Partnership",
+    filename: "article-partnership.jpg",
+    page: "article-partnership.html"
+  }
+];
+
+function unsplashUrl(id, width) {
+  return `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=85`;
+}
+
+// ─── Build cards ──────────────────────────────────────────────────────────
+const grid = document.getElementById('imageGrid');
+
+IMAGES.forEach((img, i) => {
+  const card = document.createElement('div');
+  card.className = 'image-card';
+  card.id = `card-${i}`;
+  card.innerHTML = `
+    <div class="image-thumb-placeholder" id="thumb-placeholder-${i}">🖼️</div>
+    <div class="image-info">
+      <div class="image-label">${img.label}</div>
+      <div class="image-name">images/${img.filename}</div>
+      <div class="image-status" id="status-${i}">Ready to download</div>
+      <button class="btn-download-one" onclick="downloadOne(${i})">⬇ Download this image</button>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+// ─── Preview ──────────────────────────────────────────────────────────────
+function previewAll() {
+  IMAGES.forEach((img, i) => {
+    const placeholder = document.getElementById(`thumb-placeholder-${i}`);
+    if (placeholder) {
+      const image = document.createElement('img');
+      image.className = 'image-thumb';
+      image.src = unsplashUrl(img.id, 400);
+      image.alt = img.label;
+      placeholder.replaceWith(image);
+    }
+  });
+}
+
+// ─── Download helpers ────────────────────────────────────────────────────
+function setStatus(i, text, cls) {
+  const el = document.getElementById(`status-${i}`);
+  el.textContent = text;
+  el.className = 'image-status' + (cls ? ' ' + cls : '');
+}
+
+async function fetchAndDownload(img, i) {
+  setStatus(i, 'Downloading…', 'downloading');
+  const btn = document.querySelector(`#card-${i} button`);
+  if (btn) btn.disabled = true;
+
+  try {
+    const url = unsplashUrl(img.id, 1400);
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = objectUrl;
+    a.download = img.filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 5000);
+    setStatus(i, '✓ Saved as ' + img.filename, 'done');
+    if (btn) btn.textContent = '✓ Downloaded';
+  } catch (err) {
+    console.error(err);
+    // Fallback: open in new tab so user can save manually
+    setStatus(i, '⚠ Auto-download failed — opening in new tab. Right-click → Save As: ' + img.filename, 'error');
+    window.open(unsplashUrl(img.id, 1400), '_blank');
+    if (btn) { btn.disabled = false; btn.textContent = '↗ Open in new tab'; }
+  }
+}
+
+async function downloadOne(i) {
+  await fetchAndDownload(IMAGES[i], i);
+}
+
+async function downloadAll() {
+  const wrap = document.getElementById('progressWrap');
+  const bar = document.getElementById('progressBar');
+  const label = document.getElementById('progressLabel');
+  wrap.style.display = 'block';
+  label.style.display = 'block';
+
+  for (let i = 0; i < IMAGES.length; i++) {
+    label.textContent = `Downloading ${i + 1} of ${IMAGES.length}: ${IMAGES[i].filename}`;
+    bar.style.width = `${Math.round((i / IMAGES.length) * 100)}%`;
+    await fetchAndDownload(IMAGES[i], i);
+    // Small gap between downloads so browser doesn't block them
+    await new Promise(r => setTimeout(r, 600));
+  }
+
+  bar.style.width = '100%';
+  label.textContent = `✅ All ${IMAGES.length} images downloaded! Move them into your Website/images/ folder.`;
+}
+</script>
+</body>
+</html>
