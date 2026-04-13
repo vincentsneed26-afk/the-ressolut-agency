@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="Favicon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="Favicon.png" />
+<title>AI Business Insights & Tips | The ResSolut Agency Blog</title>
+<meta name="description" content="Practical AI insights for UK business leaders. Explore how ChatGPT, NotebookLM, Perplexity and Claude can transform your project management and problem-solving approach." />
+<link rel="canonical" href="blog.html" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="blog.html" />
+<meta property="og:title" content="AI Business Insights & Tips | The ResSolut Agency Blog" />
+<meta property="og:description" content="Practical AI insights for UK business leaders on project management, problem solving and using tools like ChatGPT, NotebookLM, Perplexity and Claude." />
+<meta property="og:image" content="og-image.png" />
+<meta property="og:site_name" content="The ResSolut Agency" />
+<meta property="og:locale" content="en_GB" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Business Insights | The ResSolut Agency Blog" />
+<meta name="twitter:description" content="Practical AI guides for UK businesses — project management, problem solving and ChatGPT consulting tips from The ResSolut Agency." />
+<meta name="twitter:image" content="og-image.png" />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "The ResSolut Agency Blog",
+  "url": "https://www.theressolute.agency/blog.html",
+  "description": "Practical AI business insights on project management, problem solving, and using tools like ChatGPT, NotebookLM, Perplexity AI and Claude Code.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "The ResSolut Agency",
+    "url": "https://www.theressolute.agency"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #f2f2f7; color: #140d26; overflow-x: hidden; }
+
+  :root {
+    --purple: #7847db;
+    --purple-dark: #5c35b8;
+    --purple-light: #e5dbff;
+    --text-dark: #140d26;
+    --text-mid: #33264d;
+    --text-muted: #666680;
+    --border: #d9d9d9;
+    --shadow-card: 0 4px 16px rgba(77,51,128,0.08);
+    --shadow-float: 0 8px 32px rgba(0,0,0,0.12);
+    --radius-card: 16px;
+    --radius-pill: 9999px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 24px;
+    padding: 16px 32px;
+    transition: box-shadow var(--transition), background var(--transition);
+  }
+  nav.scrolled { box-shadow: 0 4px 20px rgba(120,71,219,0.12); background: rgba(255,255,255,0.97); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; transition: opacity var(--transition); }
+  .nav-logo:hover { opacity: 0.82; }
+  .nav-logo-img { height: 42px; width: 199px; object-fit: contain; object-position: left center; display: block; flex-shrink: 0; }
+  .nav-links { display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; flex-wrap: wrap; }
+  .nav-pill {
+    padding: 7px 12px; border-radius: 8px; font-size: 15px; font-weight: 400;
+    color: var(--text-dark); cursor: pointer;
+    transition: background var(--transition), color var(--transition), transform var(--transition);
+    text-decoration: none; white-space: nowrap; position: relative; overflow: hidden;
+  }
+  .nav-pill::after { content: ''; position: absolute; inset: 0; background: var(--purple); opacity: 0; border-radius: 8px; transition: opacity var(--transition); }
+  .nav-pill:hover::after { opacity: 0.06; }
+  .nav-pill:hover { transform: translateY(-1px); }
+  .nav-pill.active { background: #f5f5f5; font-weight: 700; }
+  .nav-cta-group { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .btn-primary {
+    background: var(--purple); color: white; border: none;
+    padding: 12px 24px; border-radius: var(--radius-pill);
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    white-space: nowrap; position: relative; overflow: hidden;
+    text-decoration: none; display: inline-flex; align-items: center;
+  }
+  .btn-primary::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.25); border-radius: 50%; transform: translate(-50%,-50%); transition: width .5s, height .5s, opacity .5s; opacity: 0; }
+  .btn-primary:hover::before { width: 300px; height: 300px; opacity: 1; }
+  .btn-primary:hover { background: var(--purple-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(120,71,219,0.38); }
+  .btn-icon { width: 44px; height: 44px; border-radius: 50%; border: none; background: #f5f5f5; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background var(--transition), transform var(--transition); flex-shrink: 0; text-decoration: none; }
+  .btn-icon:hover { background: var(--purple-light); transform: rotate(90deg) scale(1.08); }
+
+  /* ─── PAGE HERO ─── */
+  .page-hero {
+    background: linear-gradient(135deg, #140d26 0%, #2d1860 50%, #7847db 100%);
+    padding: 72px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(120,71,219,0.4) 0%, transparent 70%);
+  }
+  .page-hero > * { position: relative; z-index: 1; }
+  .page-hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 9999px;
+    padding: 6px 16px;
+    font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.9);
+    margin-bottom: 24px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .page-hero h1 {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700; color: white;
+    line-height: 1.1; margin-bottom: 16px;
+  }
+  .page-hero p {
+    font-size: 18px; color: rgba(255,255,255,0.75);
+    max-width: 520px; margin: 0 auto; line-height: 1.6;
+  }
+
+  /* ─── BLOG GRID ─── */
+  .blog-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 40px 80px;
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  /* ─── CARD ─── */
+  .blog-card {
+    background: white;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: transform var(--transition), box-shadow var(--transition);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  .blog-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-float); }
+
+  .card-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .card-image-inner {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .blog-card:hover .card-image-inner { transform: scale(1.05); }
+
+  /* Unique gradient for each card */
+  .card-img-1 { background: linear-gradient(135deg, #1a0533 0%, #7847db 60%, #b388ff 100%); }
+  .card-img-2 { background: linear-gradient(135deg, #0d2233 0%, #1565c0 60%, #42a5f5 100%); }
+  .card-img-3 { background: linear-gradient(135deg, #1a2a0d 0%, #2e7d32 60%, #81c784 100%); }
+  .card-img-4 { background: linear-gradient(135deg, #2d1200 0%, #bf360c 60%, #ff8a65 100%); }
+  .card-img-5 { background: linear-gradient(135deg, #001a2d 0%, #00695c 60%, #4db6ac 100%); }
+  .card-img-6 { background: linear-gradient(135deg, #1a0d26 0%, #ad1457 60%, #f48fb1 100%); }
+
+  .card-image-icon {
+    width: 64px; height: 64px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .card-image-icon svg { display: block; }
+
+  .card-category {
+    position: absolute; top: 16px; left: 16px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 11px; font-weight: 600;
+    color: var(--purple);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .card-body {
+    padding: 24px;
+    flex: 1;
+    display: flex; flex-direction: column;
+  }
+  .card-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .card-excerpt {
+    font-size: 14px; color: var(--text-muted);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 20px;
+  }
+  .card-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f5;
+  }
+  .card-date { font-size: 12px; color: var(--text-muted); }
+  .card-read-more {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--purple);
+    transition: gap var(--transition);
+  }
+  .blog-card:hover .card-read-more { gap: 10px; }
+  .card-read-more svg { transition: transform var(--transition); }
+  .blog-card:hover .card-read-more svg { transform: translateX(3px); }
+
+  /* ─── FOOTER ─── */
+  .footer-inner { max-width: 1250px; width: 100%; margin: 0 auto; }
+  footer { background: #434343; padding: 40px 40px 60px; color: rgba(255,255,255,0.6); }
+  .footer-top { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; align-items: flex-start; }
+  .footer-brand { display: flex; flex-direction: row; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .footer-logo { display: flex; align-items: center; justify-content: center; transition: transform var(--transition); cursor: pointer; }
+  .footer-logo:hover { transform: scale(1.1) rotate(-5deg); }
+  .footer-socials { display: flex; gap: 14px; align-items: center; }
+  .social-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.08); transition: background var(--transition), transform var(--transition), box-shadow var(--transition); cursor: pointer; color: rgba(255,255,255,0.7); text-decoration: none; }
+  .social-icon:hover { background: var(--purple); transform: translateY(-4px) scale(1.1); box-shadow: 0 6px 16px rgba(120,71,219,0.5); color: white; }
+  .footer-col { display: flex; flex-direction: column; gap: 10px; }
+  .footer-col-title { color: white; font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+  .footer-link { font-size: 14px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color var(--transition), padding-left var(--transition); cursor: pointer; }
+  .footer-link:hover { color: white; padding-left: 4px; }
+  .footer-divider { height: 1px; background: rgba(255,255,255,0.15); margin: 32px 0; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: rgba(255,255,255,0.5); flex-wrap: wrap; gap: 8px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 960px) {
+    .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .blog-grid { grid-template-columns: 1fr; }
+    .blog-section { padding: 40px 20px 60px; }
+    .page-hero { padding: 48px 20px 56px; }
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">
+    <img class="nav-logo-img" src="images/logo.svg" alt="ResSolut Agency" />
+  </a>
+  <div class="nav-links">
+    <a class="nav-pill" href="services.html">Services</a>
+    <a class="nav-pill" href="about.html">About</a>
+    <a class="nav-pill active" href="blog.html">Blog</a>
+    <a class="nav-pill" href="pricing.html">Pricing</a>
+  </div>
+  <div class="nav-cta-group">
+    <a href="contact.html" class="btn-primary">Contact us</a>
+    <a href="menu.html" class="btn-icon" aria-label="Menu">
+      <img src="images/icon-burger.svg" alt="" width="18" height="18" style="display:block;" />
+    </a>
+  </div>
+</nav>
+
+<!-- ─── PAGE HERO ─── -->
+<section class="page-hero">
+  <div class="page-hero-badge">✦ &nbsp;Insights &amp; Ideas</div>
+  <h1>The ResSolut Blog</h1>
+  <p>Practical strategies, honest insights, and expert thinking to help your business move forward with clarity and confidence.</p>
+</section>
+
+<!-- ─── BLOG GRID ─── -->
+<section class="blog-section">
+  <div class="blog-grid">
+
+    <!-- Card 1 -->
+    <a href="article-problem-solving.html" class="blog-card">
+      <div class="card-image">
+        <div class="card-image-inner">
+          <img src="images/article-problem-solving.jpg" alt="Problem solving" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <span class="card-category">Problem Solving</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">5 Ways We Solve Your Toughest Business Problems</h2>
+        <p class="card-excerpt">Every growing business hits walls it can't get past alone. We break down the five most common challenges our clients face — and exactly how we tackle them head-on.</p>
+        <div class="card-meta">
+          <span class="card-date">April 2026</span>
+          <span class="card-read-more">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 2 -->
+    <a href="article-project-management.html" class="blog-card">
+      <div class="card-image">
+        <div class="card-image-inner">
+          <img src="images/article-project-management.jpg" alt="Project management" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <span class="card-category">Project Management</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">Why Project Management Is the Hidden Key to Your Success</h2>
+        <p class="card-excerpt">Most businesses underestimate the cost of poor project management. We reveal why it's the single biggest lever you can pull to unlock growth, speed, and profitability.</p>
+        <div class="card-meta">
+          <span class="card-date">March 2026</span>
+          <span class="card-read-more">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 3 -->
+    <a href="article-success-secrets.html" class="blog-card">
+      <div class="card-image">
+        <div class="card-image-inner">
+          <img src="images/article-success-secrets.jpg" alt="Mindset and growth" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <span class="card-category">Mindset &amp; Growth</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">3 Things Successful People Know That You Don't</h2>
+        <p class="card-excerpt">Success rarely comes from working harder. The leaders who get ahead consistently apply three principles that most people overlook — and they're simpler than you think.</p>
+        <div class="card-meta">
+          <span class="card-date">March 2026</span>
+          <span class="card-read-more">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 4 -->
+    <a href="article-strategic-clarity.html" class="blog-card">
+      <div class="card-image">
+        <div class="card-image-inner">
+          <img src="images/article-strategic-clarity.jpg" alt="Strategic clarity" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <span class="card-category">Strategy</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">Finding Clarity When Your Business Feels Overwhelming</h2>
+        <p class="card-excerpt">When everything feels urgent and nothing is clear, most businesses spin their wheels. Here's the strategic framework we use to cut through the noise and find what actually matters.</p>
+        <div class="card-meta">
+          <span class="card-date">February 2026</span>
+          <span class="card-read-more">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 5 -->
+    <a href="article-partnership.html" class="blog-card">
+      <div class="card-image">
+        <div class="card-image-inner">
+          <img src="images/article-partnership.jpg" alt="Partnership and collaboration" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <span class="card-category">Partnership</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">The Partnership Advantage: Why Smart Leaders Ask for Help</h2>
+        <p class="card-excerpt">The myth of the self-made success story is exactly that — a myth. The fastest-growing businesses we work with all share one common trait: they know when to bring in the right partners.</p>
+        <div class="card-meta">
+          <span class="card-date">February 2026</span>
+          <span class="card-read-more">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 6 -->
+    <a href="article-systems.html" class="blog-card">
+      <div class="card-image">
+        <div class="card-image-inner">
+          <img src="images/article-systems.jpg" alt="Building systems" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <span class="card-category">Operations</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">From Chaos to Control: Building Systems That Actually Scale</h2>
+        <p class="card-excerpt">Growth exposes every crack in your foundations. We share the operational systems and processes that help our clients move from reactive firefighting to confident, scalable momentum.</p>
+        <div class="card-meta">
+          <span class="card-date">January 2026</span>
+          <span class="card-read-more">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="images/logo-r-icon.svg" alt="Ressolute" style="width:39px;height:42px;object-fit:contain;display:block;" />
+      </div>
+      <div class="footer-socials">
+        <a href="#" class="social-icon" aria-label="X / Twitter">
+          <img src="images/icon-x.svg" alt="X" width="24" height="24" style="display:block;opacity:0.7;" />
+        </a>
+        <a href="#" class="social-icon" aria-label="Instagram">
+          <img src="images/icon-instagram.svg" alt="Instagram" width="24" height="24" style="display:block;opacity:0.7;" />
+        </a>
+        <a href="#" class="social-icon" aria-label="YouTube">
+          <img src="images/icon-youtube.svg" alt="YouTube" width="24" height="24" style="display:block;opacity:0.7;" />
+        </a>
+        <a href="#" class="social-icon" aria-label="LinkedIn">
+          <img src="images/icon-linkedin.svg" alt="LinkedIn" width="24" height="24" style="display:block;opacity:0.7;" />
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Use cases</div>
+      <a href="services.html" class="footer-link">Services</a>
+      <a href="pricing.html" class="footer-link">Pricing</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Explore</div>
+      <a href="blog.html" class="footer-link">Blog</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="contact.html" class="footer-link">Contact</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Resources</div>
+      <a href="blog.html" class="footer-link">Blog</a>
+      <a href="pricing.html" class="footer-link">Pricing</a>
+      <a href="terms.html" class="footer-link">Terms &amp; Conditions</a>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span>© The ResSolut Agency 2026</span>
+    <span><a href="terms.html#section-6" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html#section-5" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Cookies</a> &nbsp;•&nbsp; <a href="terms.html" style="color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Terms and Conditions</a></span>
+  </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+</script>
+</body>
+</html>
