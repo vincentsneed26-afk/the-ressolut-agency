@@ -201,15 +201,15 @@
 
   /* ─── Hero ─── */
   .hero {
-    background: #f2f2f7;
+    background: #f7f7fc;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 72px 80px 0;
     position: relative;
     overflow: hidden;
-    min-height: 620px;
+    height: 720px;
   }
 
   /* Figma wave graphic — fills the top portion of the hero */
@@ -278,45 +278,47 @@
     margin-bottom: 40px;
   }
 
-  /* ─── Floating Mockup Cards ─── */
+  /* ─── Mockup Area — phone sits at bottom, clipped by hero overflow ─── */
   .hero-mockup-area {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 280px;          /* visible window above hero bottom */
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: center;
-    gap: 0;
-    position: relative;
-    margin-top: 8px;
+    pointer-events: none;
   }
   .mockup-card {
     background: white;
     border-radius: 16px;
     box-shadow: var(--shadow-float);
-    padding: 16px;
-    position: relative;
-    animation: float 4s ease-in-out infinite;
+    padding: 18px;
+    position: absolute;
+    pointer-events: auto;
   }
   .mockup-card.history {
-    width: 200px;
-    z-index: 2;
-    margin-right: -30px;
-    animation-delay: 0.5s;
+    width: 220px;
+    left: calc(50% - 280px);
+    top: 60px;
+    z-index: 1;             /* behind phone */
   }
-  .mockup-card.history h4 { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
-  .mockup-card.history p { font-size: 12px; line-height: 1.8; color: var(--text-mid); }
+  .mockup-card.history h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
+  .mockup-card.history p { font-size: 13px; line-height: 1.8; color: var(--text-mid); }
   .mockup-card.history .neg { color: #cc3333; }
 
   .phone-mockup {
-    width: 180px;
-    height: 300px;
+    width: 320px;
+    height: 620px;
     background: #140d26;
-    border-radius: 28px;
+    border-radius: 44px;
     overflow: hidden;
-    z-index: 3;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+    z-index: 3;             /* in front of cards */
+    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
     position: relative;
-    animation: float 4s ease-in-out infinite;
-    animation-delay: 0s;
     flex-shrink: 0;
+    pointer-events: auto;
   }
   .phone-inner {
     width: 100%;
@@ -377,18 +379,13 @@
   }
 
   .mockup-card.income {
-    width: 170px;
-    z-index: 2;
-    margin-left: -30px;
-    animation-delay: 1s;
+    width: 200px;
+    right: calc(50% - 260px);
+    top: 120px;
+    z-index: 1;             /* behind phone */
   }
-  .mockup-card.income h4 { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
-  .mockup-card.income .amount { font-size: 22px; font-weight: 700; color: var(--text-dark); }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
+  .mockup-card.income h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+  .mockup-card.income .amount { font-size: 26px; font-weight: 700; color: var(--text-dark); }
 
   /* ─── Social Proof ─── */
   .social-proof {
@@ -724,8 +721,17 @@
     .cta-btn { width: 100%; text-align: center; }
     .workflow-section,
     .promise-section { padding: 48px 20px; }
-    .hero { background: var(--purple); padding: 56px 24px 0; }
+    .hero { background: var(--purple); padding: 56px 24px 0; height: auto; min-height: 760px; }
     .hero-wave { display: none; }
+    .hero-mockup-area { height: 320px; }
+    .mockup-card.history { left: 12px; top: 40px; width: 160px; padding: 14px; }
+    .mockup-card.history h4 { font-size: 13px; }
+    .mockup-card.history p { font-size: 11px; }
+    .mockup-card.income { right: 12px; top: 90px; width: 150px; padding: 14px; }
+    .mockup-card.income h4 { font-size: 13px; }
+    .mockup-card.income .amount { font-size: 22px; }
+    .phone-mockup { width: 240px; height: 480px; border-radius: 36px; }
+    .phone-mockup img { width: 543px !important; height: 787px !important; left: -222px !important; top: -101px !important; }
   }
 
   /* ─── Scroll-reveal animation ─── */
@@ -822,7 +828,7 @@
       <img
         src="images/iphone-mockup.png"
         alt="App mockup on iPhone X"
-        style="position:absolute; width:407px; height:590px; left:-167px; top:-76px; max-width:none; object-fit:cover; pointer-events:none;"
+        style="position:absolute; width:724px; height:1049px; left:-297px; top:-135px; max-width:none; object-fit:cover; pointer-events:none;"
       />
     </div>
 
@@ -833,8 +839,6 @@
     </div>
   </div>
 </div>
-
-<div class="divider"></div>
 
 <!-- ═══════════════════════ WORKFLOW ═══════════════════════ -->
 <section class="workflow-section">
